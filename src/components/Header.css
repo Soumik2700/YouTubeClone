@@ -1,0 +1,30 @@
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .search-container {
+        width: 50%;
+    }
+}
+
+@media (max-width: 768px) {
+    .search-container {
+        width: 60%;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-container {
+        width: 90%;
+    }
+
+    /* Stack header items for small screens */
+    .header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .sign-in {
+        width: 100%;
+        justify-content: center;
+    }
+}

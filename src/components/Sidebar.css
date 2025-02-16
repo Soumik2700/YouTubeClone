@@ -1,0 +1,55 @@
+/* Sidebar Container */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 16rem;
+    /* 64px * 4 = 256px */
+    background-color: #111;
+    color: white;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Show Sidebar when open */
+.sidebar.open {
+    transform: translateX(0);
+}
+
+/* Hamburger Button */
+.hamburger-btn {
+    padding: 8px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    top: 1.5rem;
+    left: 1rem;
+    z-index: 50;
+}
+
+/* Sidebar Links */
+.sidebar-link {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    transition: background 0.3s ease;
+}
+
+.sidebar-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Make Sidebar Work on All Screens */
+@media (min-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+}
