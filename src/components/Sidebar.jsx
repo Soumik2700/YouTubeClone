@@ -1,32 +1,35 @@
+import { HiMenu } from "react-icons/hi";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { HiMenu } from "react-icons/hi"; // Hamburger icon
-import { AiOutlineClose } from "react-icons/ai"; // Close icon
-import "./Sidebar.css"; // Import external CSS for animations & responsiveness
+import "./Sidebar.css"
 
-const Sidebar = () => {
-    const [isOpen, setIsOpen] = useState(true);
+function Sidebar() {
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <>
-            {/* Hamburger Button (Works on All Screens) */}
-            <button className="hamburger-btn" onClick={() => setIsOpen(!isOpen)}>
-                {isOpen ? <AiOutlineClose size={24} /> : <HiMenu size={24} />}
+        <div className="flex">
+            {/* Menu Icon - Stays Fixed */}
+            <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="absolute top-6 md:top-5 left-4 p-2 text-white rounded-full"
+            >
+                <HiMenu size={30} />
             </button>
 
             {/* Sidebar */}
-            <aside className={`sidebar ${isOpen ? "open" : ""}`}>
-                {/* Sidebar Links */}
-                <nav className="flex flex-col p-4 space-y-3 mt-10">
-                    <Link to="/" className="sidebar-link">🏠 Home</Link>
-                    <Link to="/channel/1" className="sidebar-link">📺 My Channel</Link>
-                    <Link to="/" className="sidebar-link">🔥 Trending</Link>
-                    <Link to="/" className="sidebar-link">🎵 Music</Link>
-                    <Link to="/" className="sidebar-link">🎮 Gaming</Link>
-                </nav>
-            </aside>
-        </>
+            <div
+                className={`bg-gray-800 text-white h-screen p-4 transition-all ${isOpen ? "w-60" : "w-0 overflow-hidden"
+                    }`}
+            >
+                <ul className={`${isOpen ? "block" : "hidden"}`}>
+                    <li className="p-2">Home</li>
+                    <li className="p-2">My Channel</li>
+                    <li className="p-2">Trending</li>
+                    <li className="p-2">Music</li>
+                    <li className="p-2">Gaming</li>
+                </ul>
+            </div>
+        </div>
     );
-};
+}
 
 export default Sidebar;
