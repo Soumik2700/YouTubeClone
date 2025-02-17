@@ -49,15 +49,15 @@ const videos = [
     },
     {
         videoId: "video04",
-        title: "Learn React in 30 Minutes | FreeCodeCamp.org",
+        title: "IQOO 13 INDIA FASTEST PHONE | 120FPS TEST 😲🔥| WITH HANDCAM #IQOO13 @toxi_islive #120FPS",
         thumbnailUrl: "https://img.youtube.com/vi/WlS1EyAUCQs/maxresdefault.jpg",
         videoUrl: "https://www.youtube.com/embed/WlS1EyAUCQs",
-        description: "A beginner-friendly crash course on React covering core concepts in just 30 minutes.",
+        description: "Dive into the world of gaming with this exciting gameplay video.",
         channelId: "UC8butISFwT-Wl7EV0hUK0BQ",
-        uploader: "freeCodeCamp.org",
-        views: 2_800_000,
-        likes: 94_000,
-        dislikes: 1_500,
+        uploader: "TOXI IS LIVE",
+        views: 347,
+        likes: 35,
+        dislikes: 0,
         uploadDate: "2020-06-18",
         comments: [
             { commentId: "comment04", userId: "user05", text: "Best tutorial for beginners!", timestamp: "2024-09-21T11:45:00Z" }
@@ -77,6 +77,70 @@ const videos = [
         uploadDate: "2019-11-12",
         comments: [
             { commentId: "comment05", userId: "user06", text: "Exactly what I needed!", timestamp: "2024-09-21T12:30:00Z" }
+        ]
+    },
+    {
+        videoId: "video06",
+        title: "Kesariya | Brahmāstra | Arijit Singh | Pritam | Ranbir, Alia",
+        thumbnailUrl: "https://img.youtube.com/vi/BddP6PYo2gs/maxresdefault.jpg",
+        videoUrl: "https://www.youtube.com/embed/BddP6PYo2gs",
+        description: "Kesariya song from Brahmāstra, sung by Arijit Singh and composed by Pritam.",
+        channelId: "UCq-Fj5jknLsUf-MWSy4_brA",
+        uploader: "Sony Music India",
+        views: 20_500_000,
+        likes: 350_000,
+        dislikes: 3_500,
+        uploadDate: "2022-07-17",
+        comments: [
+            { commentId: "comment06", userId: "user07", text: "This song gives me goosebumps!", timestamp: "2024-09-21T13:15:00Z" }
+        ]
+    },
+    {
+        videoId: "video07",
+        title: "Pasoori | Shae Gill, Ali Sethi | Coke Studio Season 14",
+        thumbnailUrl: "https://img.youtube.com/vi/5Eqb_-j3FDA/maxresdefault.jpg",
+        videoUrl: "https://www.youtube.com/embed/5Eqb_-j3FDA",
+        description: "Pasoori, a mesmerizing track from Coke Studio Season 14 by Shae Gill and Ali Sethi.",
+        channelId: "UCDJQBlwA8k6JpeFV1ODl8yQ",
+        uploader: "Coke Studio",
+        views: 100_000_000,
+        likes: 1_800_000,
+        dislikes: 25_000,
+        uploadDate: "2022-02-07",
+        comments: [
+            { commentId: "comment07", userId: "user08", text: "The best song of the year!", timestamp: "2024-09-21T14:00:00Z" }
+        ]
+    },
+    {
+        videoId: "video08",
+        title: "JavaScript Full Course | FreeCodeCamp",
+        thumbnailUrl: "https://img.youtube.com/vi/PkZNo7MFNFg/maxresdefault.jpg",
+        videoUrl: "https://www.youtube.com/embed/PkZNo7MFNFg",
+        description: "A full JavaScript crash course covering basics to advanced concepts.",
+        channelId: "UC8butISFwT-Wl7EV0hUK0BQ",
+        uploader: "freeCodeCamp.org",
+        views: 5_000_000,
+        likes: 250_000,
+        dislikes: 4_500,
+        uploadDate: "2021-05-10",
+        comments: [
+            { commentId: "comment08", userId: "user09", text: "Amazing content as always!", timestamp: "2024-09-21T15:30:00Z" }
+        ]
+    },
+    {
+        videoId: "video09",
+        title: "Learn Tailwind CSS in 1 Hour | Traversy Media",
+        thumbnailUrl: "https://img.youtube.com/vi/dFgzHOX84xQ/maxresdefault.jpg",
+        videoUrl: "https://www.youtube.com/embed/dFgzHOX84xQ",
+        description: "A complete introduction to Tailwind CSS for beginners by Traversy Media.",
+        channelId: "UC29ju8bIPH5as8OGnQzwJyA",
+        uploader: "Traversy Media",
+        views: 2_500_000,
+        likes: 85_000,
+        dislikes: 1_200,
+        uploadDate: "2020-09-25",
+        comments: [
+            { commentId: "comment09", userId: "user10", text: "Best Tailwind tutorial out there!", timestamp: "2024-09-21T16:45:00Z" }
         ]
     }
 ];

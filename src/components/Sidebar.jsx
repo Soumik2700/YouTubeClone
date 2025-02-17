@@ -1,10 +1,7 @@
 import { HiMenu } from "react-icons/hi";
-import { useState } from "react";
-import "./Sidebar.css"
+import "./Sidebar.css";
 
-function Sidebar() {
-    const [isOpen, setIsOpen] = useState(false);
-
+function Sidebar({ isOpen, setIsOpen }) {
     return (
         <div className="flex">
             {/* Menu Icon - Stays Fixed */}
@@ -17,15 +14,18 @@ function Sidebar() {
 
             {/* Sidebar */}
             <div
-                className={`bg-gray-800 text-white h-screen p-4 transition-all ${isOpen ? "w-60" : "w-0 overflow-hidden"
-                    }`}
+                className={`bg-gray-900 text-white min-h-screen transition-all duration-300 
+                ${isOpen ? "w-60" : "w-0 overflow-hidden"}`}
             >
-                <ul className={`${isOpen ? "block" : "hidden"}`}>
-                    <li className="p-2">Home</li>
-                    <li className="p-2">My Channel</li>
-                    <li className="p-2">Trending</li>
-                    <li className="p-2">Music</li>
-                    <li className="p-2">Gaming</li>
+                {/* Fade in the <ul> with opacity */}
+                <ul
+                    className={`transition-all duration-300 ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+                >
+                    <li className="p-2">🏠 Home</li>
+                    <li className="p-2">📺 My Channel</li>
+                    <li className="p-2">🔥 Trending</li>
+                    <li className="p-2">🎵 Music</li>
+                    <li className="p-2">🎮 Gaming</li>
                 </ul>
             </div>
         </div>
