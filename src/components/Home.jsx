@@ -8,7 +8,7 @@ function Home() {
     return (
         <div>
             {/* Filter Section */}
-            <ul className="w-screen bg-gray-900 text-white px-7 flex gap-7">
+            <ul className="bg-gray-900 text-white px-7 flex gap-7">
                 <li>All</li>
                 <li>Music</li>
                 <li>Gaming</li>
@@ -17,7 +17,7 @@ function Home() {
             </ul>
 
             {/* Video Section */}
-            <section className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <section className="min-h-screen bg-gray-800 text-white p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {
                     videos.map((video) => (
                         <VideoPlayer key={video.videoId} video={video} />

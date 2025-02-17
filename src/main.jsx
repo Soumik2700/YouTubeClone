@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.jsx'
 import Home from './components/Home.jsx'
 import VideoDetails from './components/VideoDetails.jsx'
+import SignIn from './components/SignIn.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 const appRouter = createBrowserRouter([
@@ -18,6 +19,10 @@ const appRouter = createBrowserRouter([
       {
         path: '/videoDetails/:id',
         element: <VideoDetails />
+      },
+      {
+        path:"/signIn",
+        element:<SignIn/>
       }
     ]
   }

@@ -17,12 +17,12 @@ const videos = [
     },
     {
         videoId: "video02",
-        title: "Hey Shokha (হে সখা) | Arna Seal | Rabindra Sangeet | Official Music Video",
+        title: "Hey Shokha (হে সখা) | Rabindrasangeet | Somlata | Arindom | Anushka, Dibyojyoti | SVF Music",
         thumbnailUrl: "https://img.youtube.com/vi/UpxTJXxTJJ0/maxresdefault.jpg",
         videoUrl: "https://www.youtube.com/embed/UpxTJXxTJJ0",
         description: "A beautiful rendition of the Rabindra Sangeet classic 'Hey Shokha' by Arna Seal.",
         channelId: "UCDJQBlwA8k6JpeFV1ODl8yQ",
-        uploader: "Arna Seal Music",
+        uploader: "SVF Music",
         views: 720_000,
         likes: 18_000,
         dislikes: 320,
@@ -33,7 +33,7 @@ const videos = [
     },
     {
         videoId: "video03",
-        title: "Esho Hey | Tagore Song | Debojyoti Mishra | Iman Chakraborty",
+        title: "Esho Hey (এসো হে) | Ek Je Chhilo Raja | Jishhu | Shreya | Ishan | Indraadip | Srijato | Srijit | SVF",
         thumbnailUrl: "https://img.youtube.com/vi/-8R95O4YMts/maxresdefault.jpg",
         videoUrl: "https://www.youtube.com/embed/-8R95O4YMts",
         description: "A heartfelt performance of 'Esho Hey' by Iman Chakraborty, composed by Debojyoti Mishra.",
