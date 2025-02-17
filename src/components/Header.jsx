@@ -7,11 +7,11 @@ import "./Header.css"; // Import only for media queries
 
 function Header() {
     return (
-        <header className="flex justify-between items-center bg-gray-900 text-white p-4">
+        <header className="min-w-screen flex justify-between items-center bg-gray-900 text-white p-4">
             {/* Logo */}
             <h1 className="text-xl font-bold flex p-2 items-center gap-3">
                 <div className="flex w-full h-full items-center ml-9 gap-1">
-                    <Link className="hidden md:contents"><img className="w-10 h-10" src={HeaderLogo} alt="" /></Link>
+                    <Link className="opacity-0 md:opacity-100"><img className="w-10 h-10" src={HeaderLogo} alt="" /></Link>
                     <Link className="hidden md:contents" to="/">YouTube</Link>
                 </div>
 

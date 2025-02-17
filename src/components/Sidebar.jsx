@@ -1,4 +1,5 @@
 import { HiMenu } from "react-icons/hi";
+import { Link } from "react-router-dom";
 import "./Sidebar.css";
 
 function Sidebar({ isOpen, setIsOpen }) {
@@ -21,7 +22,7 @@ function Sidebar({ isOpen, setIsOpen }) {
                 <ul
                     className={`transition-all duration-300 ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
                 >
-                    <li className="p-2">🏠 Home</li>
+                    <Link to="/" onClick={()=>setIsOpen(false)}><li className="p-2">🏠 Home</li></Link>
                     <li className="p-2">📺 My Channel</li>
                     <li className="p-2">🔥 Trending</li>
                     <li className="p-2">🎵 Music</li>

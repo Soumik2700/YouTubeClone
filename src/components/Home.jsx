@@ -1,14 +1,15 @@
 import { useOutletContext } from "react-router-dom";
 import VideoPlayer from "./VideoPlayer";
 import videos from "../utils/mockData";
+import "./Home.css"
 
 function Home() {
     const { isOpen } = useOutletContext();
 
     return (
-        <div>
+        <div className="">
             {/* Filter Section */}
-            <ul className="bg-gray-900 text-white px-7 flex gap-7">
+            <ul className="filterList bg-gray-900 text-white px-7 flex gap-7">
                 <li>All</li>
                 <li>Music</li>
                 <li>Gaming</li>

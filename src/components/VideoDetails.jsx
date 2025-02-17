@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import videos from "../utils/mockData";
 import RemainingVideoPlayer from "./RemainingVideoPlayer";
+import "./videoDetails.css"
 
 function VideoDetails() {
     const { id } = useParams(); // Get video ID from URL
@@ -12,12 +13,12 @@ function VideoDetails() {
     }
 
     return (
-        <main className="flex h-screen bg-gray-900">
+        <main className="flex min-h-screen bg-gray-900">
             {/* Main Video Section */}
-            <div className="w-[65%] p-6 bg-gray-800 text-white">
+            <div className="videoDetails w-[65%] p-6 bg-gray-800 text-white">
                 {/* Video Player */}
                 <iframe
-                    className="w-full h-[500px] rounded-lg"
+                    className="w-full video h-[500px] rounded-lg"
                     src={video.videoUrl}
                     title={video.title}
                     frameBorder="0"
@@ -35,10 +36,12 @@ function VideoDetails() {
                     <span>👍 {video.likes.toLocaleString()}</span>
                     <span>👎 {video.dislikes.toLocaleString()}</span>
                 </div>
+
+                
             </div>
 
             {/* Remaining Videos Sidebar */}
-            <div className="w-[35%] bg-gray-800 overflow-y-auto max-h-screen">
+            <div className="w-[35%] adjustRemaining bg-gray-800 overflow-y-auto max-h-screen">
                 {
                     remainingVideos.map(video => <RemainingVideoPlayer key={video.videoId} video={video} />)
                 }

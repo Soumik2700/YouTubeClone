@@ -1,0 +1,16 @@
+.adjustRemaining{
+    display: flex;
+    flex-direction: column;
+}
+
+@media(max-width:767px){
+    .adjustRemaining{
+        display: none;
+    }
+    .videoDetails{
+        width: max-content;
+    }
+    .video{
+        height: 300px;
+    }
+}

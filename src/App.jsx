@@ -1,16 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
 import Header from './components/Header'
 import Sidebar from './components/Sidebar'
 import { Outlet } from 'react-router-dom'
 
 function App() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className='flex flex-col h-screen'>
+    <div className='flex flex-col min-h-screen'>
       <Header />
-      <div className="flex flex-1 transition-all duration-300">
+      <div className="min-h-screen flex flex-1 transition-all duration-300">
         {/* Sidebar takes space instead of being fixed */}
         <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
 
