@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './App.css'
 import Header from './components/Header'
 import Sidebar from './components/Sidebar'
@@ -15,8 +15,8 @@ function App() {
         <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
 
         {/* Home adjusts based on sidebar state */}
-        <div className={`${isOpen ? "w-[calc(100%-15rem)]" : "w-full"} transition-all duration-300`}>
-          <Outlet context={{ isOpen }} />
+        <div onClick={()=>window.innerWidth < 768 && setIsOpen(false)} className={`${isOpen ? "w-[calc(100%-15rem)]" : "w-full"} transition-all duration-300`}>
+          <Outlet context={{ isOpen, setIsOpen }} />
         </div>
       </div>
     </div>

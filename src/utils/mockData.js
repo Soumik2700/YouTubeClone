@@ -142,6 +142,38 @@ const videos = [
         comments: [
             { commentId: "comment09", userId: "user10", text: "Best Tailwind tutorial out there!", timestamp: "2024-09-21T16:45:00Z" }
         ]
+    },
+    {
+        videoId: "video09",
+        title: "Learn Tailwind CSS in 1 Hour | Traversy Media",
+        thumbnailUrl: "https://img.youtube.com/vi/dFgzHOX84xQ/maxresdefault.jpg",
+        videoUrl: "https://www.youtube.com/embed/dFgzHOX84xQ",
+        description: "A complete introduction to Tailwind CSS for beginners by Traversy Media.",
+        channelId: "UC29ju8bIPH5as8OGnQzwJyA",
+        uploader: "Traversy Media",
+        views: 2_500_000,
+        likes: 85_000,
+        dislikes: 1_200,
+        uploadDate: "2020-09-25",
+        comments: [
+            { commentId: "comment09", userId: "user10", text: "Best Tailwind tutorial out there!", timestamp: "2024-09-21T16:45:00Z" }
+        ]
+    },
+    {
+        videoId: "video09",
+        title: "Learn Tailwind CSS in 1 Hour | Traversy Media",
+        thumbnailUrl: "https://img.youtube.com/vi/dFgzHOX84xQ/maxresdefault.jpg",
+        videoUrl: "https://www.youtube.com/embed/dFgzHOX84xQ",
+        description: "A complete introduction to Tailwind CSS for beginners by Traversy Media.",
+        channelId: "UC29ju8bIPH5as8OGnQzwJyA",
+        uploader: "Traversy Media",
+        views: 2_500_000,
+        likes: 85_000,
+        dislikes: 1_200,
+        uploadDate: "2020-09-25",
+        comments: [
+            { commentId: "comment09", userId: "user10", text: "Best Tailwind tutorial out there!", timestamp: "2024-09-21T16:45:00Z" }
+        ]
     }
 ];
 

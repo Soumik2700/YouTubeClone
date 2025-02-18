@@ -14,3 +14,12 @@
         height: 300px;
     }
 }
+
+.remainingVideoOverflow{
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+    scrollbar-color: gray ;
+    scrollbar-color: gray var(--color-gray-900);
+    
+}

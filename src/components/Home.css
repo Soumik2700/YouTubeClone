@@ -3,3 +3,12 @@
         display: none;
     }
 }
+
+.signInText{
+    display: none;
+}
+@media(min-width: 768px){
+    .signInText{
+        display: contents;
+    }
+}

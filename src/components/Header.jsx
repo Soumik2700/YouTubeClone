@@ -22,7 +22,7 @@ function Header() {
                 <input
                     type="text"
                     placeholder="Search..."
-                    className="w-full px-4 py-2 bg-gray-800 text-white rounded-full focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    className="w-full px-4 py-2 bg-gray-800 text-white rounded-full focus:outline-none focus:ring-1 focus:ring-blue-500 mr-2"
                 />
                 <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-700 p-2 rounded-full hover:bg-gray-600 transition">
                     <IoSearchOutline className="text-xl text-white" />
@@ -31,9 +31,9 @@ function Header() {
 
             {/* Sign In Button */}
             <Link to="/signIn">
-                <button className="flex items-center gap-2 px-5 py-2 rounded-full border border-gray-300 hover:bg-gray-800 transition">
-                    <PiUserCircle className="text-2xl" />
-                    <span>Sign in</span>
+                <button className="flex items-center gap-2 px-5 py-2 mr-9 rounded-full md:border md:border-gray-300 hover:bg-gray-800 transition">
+                    <PiUserCircle className="text-3xl" />
+                    <span className="signInText">Sign in</span>
                 </button>
             </Link>
 
