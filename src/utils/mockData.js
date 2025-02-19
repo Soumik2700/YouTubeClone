@@ -144,7 +144,7 @@ const videos = [
         ]
     },
     {
-        videoId: "video09",
+        videoId: "video10",
         title: "Learn Tailwind CSS in 1 Hour | Traversy Media",
         thumbnailUrl: "https://img.youtube.com/vi/dFgzHOX84xQ/maxresdefault.jpg",
         videoUrl: "https://www.youtube.com/embed/dFgzHOX84xQ",
@@ -160,7 +160,7 @@ const videos = [
         ]
     },
     {
-        videoId: "video09",
+        videoId: "video11",
         title: "Learn Tailwind CSS in 1 Hour | Traversy Media",
         thumbnailUrl: "https://img.youtube.com/vi/dFgzHOX84xQ/maxresdefault.jpg",
         videoUrl: "https://www.youtube.com/embed/dFgzHOX84xQ",

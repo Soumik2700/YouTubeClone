@@ -1,18 +1,31 @@
+import {useState} from "react";
 import { Link } from "react-router-dom";
 import { PiUserCircle } from "react-icons/pi";
 import { IoSearchOutline } from "react-icons/io5";
 import HeaderLogo from "../assets/youtubeicon.png"
+import { useNavigate } from "react-router-dom";
 import "./Header.css"; // Import only for media queries
 
 
-function Header() {
+function Header({ setSearchQuery }) {
+    const [search, setSearch] = useState("");
+    const navigate = useNavigate();
+
+    function handelSearch(){
+        setSearchQuery(search.trim());
+        document.querySelector(".search").value = "";
+    }
+
     return (
         <header className="min-w-screen flex justify-between items-center bg-gray-900 text-white p-4">
             {/* Logo */}
             <h1 className="text-xl font-bold flex p-2 items-center gap-3">
                 <div className="flex w-full h-full items-center ml-9 gap-1">
                     <Link className="opacity-0 md:opacity-100"><img className="w-10 h-10" src={HeaderLogo} alt="" /></Link>
-                    <Link className="hidden md:contents" to="/">YouTube</Link>
+                    <Link className="hidden md:contents" to="/" onClick={()=> {
+                        navigate("/");
+                        window.location.reload();
+                    }}>YouTube</Link>
                 </div>
 
             </h1>
@@ -22,9 +35,13 @@ function Header() {
                 <input
                     type="text"
                     placeholder="Search..."
-                    className="w-full px-4 py-2 bg-gray-800 text-white rounded-full focus:outline-none focus:ring-1 focus:ring-blue-500 mr-2"
+                    className="search w-full px-4 py-2 bg-gray-800 text-white rounded-full focus:outline-none focus:ring-1 focus:ring-blue-500 mr-2"
+                    onChange={(e)=> setSearch(e.target.value)}
                 />
-                <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-700 p-2 rounded-full hover:bg-gray-600 transition">
+                <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-700 p-2 rounded-full hover:bg-gray-600 transition" onClick={()=>{
+                    navigate("/");
+                    handelSearch();
+                }}>
                     <IoSearchOutline className="text-xl text-white" />
                 </button>
             </section>

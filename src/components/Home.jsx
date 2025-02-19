@@ -1,10 +1,22 @@
 import { useOutletContext } from "react-router-dom";
+import { useEffect, useState } from "react";
 import VideoPlayer from "./VideoPlayer";
 import videos from "../utils/mockData";
 import "./Home.css"
 
 function Home() {
-    const { isOpen } = useOutletContext();
+    const [allVideos, setAllVideos] = useState(videos);
+    const { isOpen, setIsOpen, searchQuery } = useOutletContext();
+
+    useEffect(() => {
+        if(!searchQuery) return;
+        // console.log(searchQuery);
+
+        const filteredVideos = videos.filter(video => video.title.toLowerCase().includes(searchQuery.toLowerCase()));
+        console.log(filteredVideos);
+        setAllVideos(filteredVideos);
+    }, [searchQuery])
+
 
     return (
         <div className="">
@@ -20,7 +32,7 @@ function Home() {
             {/* Video Section */}
             <section className="min-h-screen bg-gray-800 text-white p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {
-                    videos.map((video) => (
+                    allVideos.map((video) => (
                         <VideoPlayer key={video.videoId} video={video} />
                     ))
                 }

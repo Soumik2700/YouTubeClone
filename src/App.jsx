@@ -6,17 +6,19 @@ import { Outlet } from 'react-router-dom'
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState(null);
+  console.log(searchQuery);
 
   return (
     <div className='flex flex-col min-h-screen'>
-      <Header />
+      <Header setSearchQuery={setSearchQuery}/>
       <div className="min-h-screen flex flex-1 transition-all duration-300">
         {/* Sidebar takes space instead of being fixed */}
         <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
 
         {/* Home adjusts based on sidebar state */}
         <div onClick={()=>window.innerWidth < 768 && setIsOpen(false)} className={`${isOpen ? "w-[calc(100%-15rem)]" : "w-full"} transition-all duration-300`}>
-          <Outlet context={{ isOpen, setIsOpen }} />
+          <Outlet context={{ isOpen, setIsOpen, searchQuery }} />
         </div>
       </div>
     </div>

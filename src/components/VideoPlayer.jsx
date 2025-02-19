@@ -2,7 +2,6 @@ import { FaPlay } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const VideoPlayer = ({ video }) => {
-    console.log(video);
 
     return (
         <Link to={`videoDetails/${video.videoId}`}>
