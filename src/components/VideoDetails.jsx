@@ -3,7 +3,7 @@ import videos from "../utils/mockData";
 import RemainingVideoPlayer from "./RemainingVideoPlayer";
 import "./videoDetails.css";
 import Comment from "./comment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function VideoDetails() {
     const { id } = useParams();
@@ -11,10 +11,19 @@ function VideoDetails() {
     const remainingVideos = videos.filter(video => video.videoId !== id);
     const [commentText, setCommentText] = useState("");
     const [comments, setComments] = useState(video?.comments || []);
+    const [commentId, setCommentId] = useState(null);
 
     if (!video) {
         return <h2 className="text-white text-center mt-10">Video Not Found</h2>;
     }
+
+    // ✅ Fix: Only delete when commentId is valid
+    useEffect(() => {
+        if (commentId !== null) {
+            setComments(prevComments => prevComments.filter(comment => comment.commentId !== commentId));
+            setCommentId(null); // Reset commentId after deletion
+        }
+    }, [commentId]);
 
     function handleSetComment() {
         if (!commentText.trim()) return;
@@ -31,20 +40,19 @@ function VideoDetails() {
     }
 
     function handleEditComment(commentId, newText) {
-        setComments((prevComments) =>
-            prevComments.map((comment) =>
+        setComments(prevComments =>
+            prevComments.map(comment =>
                 comment.commentId === commentId ? { ...comment, text: newText } : comment
             )
         );
     }
-
 
     return (
         <main className="flex flex-col md:flex-row min-h-screen bg-gray-900">
             {/* Main Video Section */}
             <div className="w-full md:w-3/4 lg:w-4/5 p-6 bg-gray-800 text-white">
                 <iframe
-                    className="z-[0] w-full h-[250px] sm:h-[400px] md:h-[600px] rounded-lg cursor-pointer" 
+                    className="z-[0] w-full h-[250px] sm:h-[400px] md:h-[600px] rounded-lg cursor-pointer"
                     src={video.videoUrl}
                     title={video.title}
                     allow="autoplay; encrypted-media"
@@ -77,7 +85,7 @@ function VideoDetails() {
                 <section className="w-full bg-gray-900 rounded-md mt-4">
                     {comments.length > 0 ? (
                         comments.map(comment => (
-                            <Comment key={comment.commentId} comment={comment} onEdit={handleEditComment} />
+                            <Comment key={comment.commentId} comment={comment} onEdit={handleEditComment} setCommentId={setCommentId} />
                         ))
                     ) : (
                         <p className="text-gray-400 p-4">No comments yet. Be the first to comment!</p>
