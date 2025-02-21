@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./SignIn.css";
+import axios from "axios";
 
 function SignIn() {
     const [isSignUp, setIsSignUp] = useState(true); // Toggle between Sign Up & Login
@@ -14,14 +15,30 @@ function SignIn() {
         }).catch(err => console.log(err));
     }, [])
 
-    function handelSubmit() {
+    async function handelSubmit() {
         if (isSignUp) {
-            if (!firstName || lastName || email || password) {
-                alert("All fields are required!");
+            if (!firstName || !lastName || !email || !password) {
+                return alert("All fields are required!");
             }
         } else if (!email || !password) {
-            alert("Email and password both required!");
+            return alert("Email and password both required!");
         }
+
+        const userData = isSignUp ? { firstName, lastName, email, password } : { email, password };
+
+        try {
+            const response = await axios.post("http://localhost:3000/api/signup", userData);
+
+            console.log(response.data);
+
+            if (response.data.messsage) {
+                alert(response.data.message);
+            }
+        } catch (err) {
+            console.log("Error", err);
+            alert(err.response?.data?.message || "Something went wrong!");
+        }
+
     }
 
     return (

@@ -2,9 +2,12 @@ import express from "express";
 import mongoose from "mongoose";
 import User from "./model/user.model.js";
 import { routes } from "./routes/user.routes.js";
-import cors from "cors"
+import cors from "cors";
+import dotenv from "dotenv"
 
 mongoose.connect("mongodb+srv://soumiksingha8:wFEisWXwrsA3gYUS@firstbackend.pa25y.mongodb.net/")
+
+dotenv.config();
 
 const app = new express();
 app.use(express.json());
