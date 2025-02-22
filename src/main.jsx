@@ -6,6 +6,8 @@ import Home from './components/Home.jsx'
 import VideoDetails from './components/VideoDetails.jsx'
 import SignIn from './components/SignIn.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import ChannelDetails from './components/ChannelDetails.jsx'
+import CreateChannel from './components/CreateChannel.jsx'
 
 const appRouter = createBrowserRouter([
   {
@@ -23,6 +25,14 @@ const appRouter = createBrowserRouter([
       {
         path:"/signIn",
         element:<SignIn/>
+      },
+      {
+        path:"/viewChannel",
+        element:<ChannelDetails/>
+      },
+      {
+        path:"/createChannel",
+        element:<CreateChannel/>
       }
     ]
   }

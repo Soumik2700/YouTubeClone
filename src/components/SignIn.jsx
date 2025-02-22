@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./SignIn.css";
 import axios from "axios";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 function SignIn() {
     const [isSignUp, setIsSignUp] = useState(true); // Toggle between Sign Up & Login
@@ -8,14 +9,13 @@ function SignIn() {
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+    const { isLogin, setIsLogin } = useOutletContext();
+    const [messageText, setMessageText] = useState("")
 
-    useEffect(() => {
-        fetch("http://localhost:3000/api/signup").then(response => response.json()).then(data => {
-            console.log(data);
-        }).catch(err => console.log(err));
-    }, [])
+    async function handelSubmit(event) {
+        event.preventDefault();
 
-    async function handelSubmit() {
         if (isSignUp) {
             if (!firstName || !lastName || !email || !password) {
                 return alert("All fields are required!");
@@ -27,22 +27,44 @@ function SignIn() {
         const userData = isSignUp ? { firstName, lastName, email, password } : { email, password };
 
         try {
-            const response = await axios.post("http://localhost:3000/api/signup", userData);
+            const response = await axios.post(`http://localhost:3000/api/${isSignUp ? "signup" : "login"}`, userData);
 
-            console.log(response.data);
-
-            if (response.data.messsage) {
-                alert(response.data.message);
+            if (response.data.message){
+                return alert(response.data.message);
             }
+
+            if (response?.statusText) {
+                setMessageText(response?.statusText);
+
+                // Hide the message after 3 seconds
+                setTimeout(() => {
+                    setMessageText("");
+                }, 3000);
+            }
+
+            const { email, username, channels, avatar } = response.data;
+            const user = [username, email, channels, avatar];
+
+            if (response.data.token) {
+                localStorage.setItem("authToken", response.data.token);
+                localStorage.setItem("user", JSON.stringify(user));
+                setIsLogin(true);
+                navigate("/");
+            }
+
         } catch (err) {
             console.log("Error", err);
             alert(err.response?.data?.message || "Something went wrong!");
         }
-
     }
 
+
     return (
-        <main className="SignIn flex justify-center items-center">
+        <main className="SignIn flex-col justify-center items-center relative">
+            {
+                messageText === "Created" && <h1 className="messageBox">Registration Sucessful</h1>
+            }
+
             <div className="form-container p-6 rounded-lg shadow-lg bg-gray-800">
                 <h2 className="text-white text-2xl font-bold mb-4 text-center">
                     {isSignUp ? "Sign Up" : "Login"}

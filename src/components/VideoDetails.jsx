@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import videos from "../utils/mockData";
 import RemainingVideoPlayer from "./RemainingVideoPlayer";
 import "./videoDetails.css";
-import Comment from "./comment";
+import Comment from "./Comment";
 import { useEffect, useState } from "react";
 
 function VideoDetails() {

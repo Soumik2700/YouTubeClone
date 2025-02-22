@@ -6,7 +6,7 @@ import "./Home.css"
 
 function Home() {
     const [allVideos, setAllVideos] = useState(videos);
-    const { isOpen, setIsOpen, searchQuery } = useOutletContext();
+    const { searchQuery } = useOutletContext();
 
     useEffect(() => {
         if(!searchQuery) return;

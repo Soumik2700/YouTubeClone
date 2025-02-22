@@ -2,11 +2,16 @@ import User from "../model/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-export function createUser(req, res) {
+export async function createUser(req, res) {
     const { firstName, lastName, email, password } = req.body;
 
     if (!firstName || !lastName || !email || !password) {
         return res.status(400).json({ message: "All fields required!" });
+    }
+
+    const existingUser = await User.findOne({email});
+    if(existingUser){
+        return res.status(403).json({message:"User with this email already exists"});
     }
 
     const username = firstName + " " + lastName;
@@ -19,8 +24,8 @@ export function createUser(req, res) {
     user.save().then((data) => {
         if (!data) res.status(400).json({ message: "Something went wrong!" });
 
-        res.send(data);
-    }).catch(err => res.status(500).json({ message: "Internal server error!" }));
+        res.status(201).send(data);
+    }).catch(err => res.status(500).json({ message: err.message }));
 }
 
 export async function getUsers(req, res) {
@@ -60,12 +65,12 @@ export async function loginUser(req, res) {
         const token = jwt.sign({ id: validUser._id }, JWT_SECRET, { expiresIn: "10m" })
 
         res.send({
-            user: {
-                name: validUser.username,
-                email: validUser.email,
-                token: token
-            }
-        })
+            username: validUser.username,
+            email: validUser.email,
+            avatar: validUser.avatar,
+            channels: validUser.channels,
+            token: token,
+        });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
