@@ -53,7 +53,7 @@ function SignIn() {
             }
 
         } catch (err) {
-            console.log("Error", err);
+            // console.log("Error", err);
             alert(err.response?.data?.message || "Something went wrong!");
         }
     }

@@ -7,6 +7,7 @@ import VideoDetails from './components/VideoDetails.jsx'
 import SignIn from './components/SignIn.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ChannelDetails from './components/ChannelDetails.jsx'
+import ProtectedRoutes from './components/ProtectedRoutes.jsx'
 import CreateChannel from './components/CreateChannel.jsx'
 
 const appRouter = createBrowserRouter([
@@ -31,8 +32,14 @@ const appRouter = createBrowserRouter([
         element:<ChannelDetails/>
       },
       {
-        path:"/createChannel",
-        element:<CreateChannel/>
+        path:"/:user",
+        element:<ProtectedRoutes/>,
+        children:[
+          {
+            path:"createChannel",
+            element:<CreateChannel/>
+          }
+        ]
       }
     ]
   }

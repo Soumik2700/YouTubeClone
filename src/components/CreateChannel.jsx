@@ -1,8 +1,12 @@
+import "./CreateChannel.css"
+
 function CreateChannel() {
     return (
-        <>
-            <h1>Create Channel Page</h1>
-        </>
+        <main className="createChannel">
+            <section className="createChannelSection">
+                <h1>Create Channel section</h1>
+            </section>
+        </main>
     );
 }
 
