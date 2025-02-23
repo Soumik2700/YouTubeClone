@@ -7,13 +7,17 @@ import { Outlet } from 'react-router-dom'
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState(null);
-  const [isLogin, setIsLogin] = useState(false)
-  console.log(searchQuery);
-  console.log(isLogin);
+  const [isLogin, setIsLogin] = useState(false);
+  const [hasChannelCreated, setHasChannelCreated] = useState(false);
+  console.log("channel created", hasChannelCreated);
+  // console.log(searchQuery);
+  // console.log(isLogin);
 
   useEffect(() => {
     localStorage.getItem("user") ? setIsLogin(true) : setIsLogin(false);
   }, [])
+
+  const contexts = { isOpen, setIsOpen, searchQuery, isLogin, setIsLogin, hasChannelCreated, setHasChannelCreated }
 
   return (
     <div className='flex flex-col min-h-screen'>
@@ -24,7 +28,7 @@ function App() {
 
         {/* Home adjusts based on sidebar state */}
         <div onClick={() => window.innerWidth < 768 && setIsOpen(false)} className={`${isOpen ? "w-[calc(100%-15rem)]" : "w-full"} transition-all duration-300`}>
-          <Outlet context={{ isOpen, setIsOpen, searchQuery, isLogin, setIsLogin }} />
+          <Outlet context={contexts} />
         </div>
       </div>
     </div>

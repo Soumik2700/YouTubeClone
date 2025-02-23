@@ -1,4 +1,3 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
@@ -9,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ChannelDetails from './components/ChannelDetails.jsx'
 import ProtectedRoutes from './components/ProtectedRoutes.jsx'
 import CreateChannel from './components/CreateChannel.jsx'
+import ErrorElement from './components/ErrorElement.jsx'
 
 const appRouter = createBrowserRouter([
   {
@@ -28,20 +28,21 @@ const appRouter = createBrowserRouter([
         element:<SignIn/>
       },
       {
-        path:"/viewChannel",
-        element:<ChannelDetails/>
-      },
-      {
         path:"/:user",
-        element:<ProtectedRoutes/>,
+        element: <ProtectedRoutes />,
         children:[
           {
-            path:"createChannel",
-            element:<CreateChannel/>
+            path:"channelDetails",
+            element:<ChannelDetails/>
+          },
+          {
+            path: "createChannel",
+            element: <CreateChannel />
           }
         ]
       }
-    ]
+    ],
+    errorElement:<ErrorElement/>
   }
 ])
 

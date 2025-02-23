@@ -72,7 +72,7 @@ function Header({ setSearchQuery, isLogin }) {
             <div className="signInBtn overflow-hidden">
                 <button className="relative flex items-center gap-2 px-5 py-2 mr-9 rounded-full md:border md:border-gray-300 hover:bg-gray-800 transition" onClick={handelSignClick}>
                     {
-                        isLogin ? JSON.parse(localStorage.getItem("user"))[0].split(" ")[0] : <>
+                        isLogin ? JSON.parse(localStorage.getItem("user"))[1].split(" ")[0] : <>
                             <PiUserCircle className="text-3xl" />
                             <span className="signInText">Sign in</span>
                         </>

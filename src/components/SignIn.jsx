@@ -42,8 +42,10 @@ function SignIn() {
                 }, 3000);
             }
 
-            const { email, username, channels, avatar } = response.data;
-            const user = [username, email, channels, avatar];
+            console.log(response.data);
+
+            const { userId ,email, username, channels, avatar } = response.data;
+            const user = [userId, username, email, channels, avatar];
 
             if (response.data.token) {
                 localStorage.setItem("authToken", response.data.token);

@@ -1,5 +1,6 @@
 import { createUser, getUsers, loginUser, } from "../controller/user.controller.js";
 import { verifyToken } from "../middlewares/mid.varifyToken.js";
+import { createChannel } from "../controller/channel.controller.js";
 
 export function routes(app) {
     app.post("/api/signup", createUser);
@@ -8,4 +9,5 @@ export function routes(app) {
     app.get("/user/verify", verifyToken, (req, res)=>{
         res.json({message:"Access Granted!"});
     });
+    app.post("/user/createchannel", createChannel);
 }

@@ -9,9 +9,9 @@ export async function createUser(req, res) {
         return res.status(400).json({ message: "All fields required!" });
     }
 
-    const existingUser = await User.findOne({email});
-    if(existingUser){
-        return res.status(403).json({message:"User with this email already exists"});
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+        return res.status(403).json({ message: "User with this email already exists" });
     }
 
     const username = firstName + " " + lastName;
@@ -62,9 +62,10 @@ export async function loginUser(req, res) {
         }
 
         const JWT_SECRET = process.env.JWT_SECRET;
-        const token = jwt.sign({ id: validUser._id }, JWT_SECRET, { expiresIn: "10m" })
+        const token = jwt.sign({ id: validUser._id }, JWT_SECRET, { expiresIn: "2h" })
 
         res.send({
+            userId: validUser._id,
             username: validUser.username,
             email: validUser.email,
             avatar: validUser.avatar,

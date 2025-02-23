@@ -1,11 +1,12 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { Outlet } from "react-router-dom";
 
-function ProtectedRoutes({ children }) {
+function ProtectedRoutes() {
     const navigate = useNavigate();
     const [isVerified, setIsVerified] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const checkTokenValidity = async () => {
@@ -29,14 +30,19 @@ function ProtectedRoutes({ children }) {
                 console.error("Token validation failed:", err.response?.data?.message || err.message);
                 localStorage.removeItem("authToken");
                 localStorage.removeItem("user");
-                navigate("/signIn"); // Redirect to login if token is invalid
+                navigate("/signIn");
+                window.location.reload();
+            } finally {
+                setLoading(false);
             }
         };
 
         checkTokenValidity();
     }, [navigate]);
 
-    return <>{isVerified && <Outlet/>}</>; // Render protected content if token is valid
+    if (loading) return <p>Loading...</p>; // Prevents rendering during token validation
+
+    return isVerified && <Outlet />;
 }
 
 export default ProtectedRoutes;

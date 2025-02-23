@@ -19,7 +19,7 @@ function ChannelInfo() {
 
     useEffect(() => {
         if (user.length > 0) {
-            setName(user[0]?.split(" ")[0]); // Extract first name safely
+            setName(user[1]?.split(" ")[0]); // Extract first name safely
         }
     }, [user]);
 
@@ -27,8 +27,8 @@ function ChannelInfo() {
         <div className="channelInfo">
             <h1>
                 {
-                    Array.isArray(user[2]) && user[2].length > 0 ? (
-                        <Link to="/viewChannel">View Channel</Link>
+                    Array.isArray(user[3]) && user[3].length > 0 ? (
+                        <Link to={`/${name}/channelDetails`}>View Channel</Link>
                     ) : (
                         <Link to={`/${name ? name : ""}/createChannel`}>Create Channel</Link>
                     )
