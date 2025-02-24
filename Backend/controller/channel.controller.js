@@ -14,10 +14,10 @@ export async function createChannel(req, res) {
         })
 
         const savedChannel = await channel.save();
-        const user = await User.findOne({email:owner});
+        const user = await User.findOne({ email: owner });
 
-        if(!user){
-            return res.status(404).json({message: "No user found!"});
+        if (!user) {
+            return res.status(404).json({ message: "No user found!" });
         }
 
         user.channels.push(savedChannel._id);
@@ -26,9 +26,28 @@ export async function createChannel(req, res) {
         res.status(201).json({
             message: "Channel created sucessfully!",
             channel: savedChannel,
-            user:user
+            user: user
         });
     } catch (err) {
-        res.status(500).json({message:err.message});
+        res.status(500).json({ message: err.message });
+    }
+}
+
+export async function getChannelInfo(req, res) {
+    const channelId = req.params.id;
+
+    if (!channelId) {
+        return res.status(400).json({ message: "No channel id provided!" });
+    }
+
+    try {
+        const channel = await Channel.findOne({ _id: channelId });
+        if (!channel) {
+            return res.status(404).json({ message: "No channel found!" });
+        }
+
+        res.status(200).send(channel);
+    } catch (err) {
+        res.status(200).json({ message: err.message });
     }
 }
