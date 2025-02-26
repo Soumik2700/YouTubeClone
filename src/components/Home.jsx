@@ -2,6 +2,7 @@ import { useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
 import VideoPlayer from "./VideoPlayer";
 import videos from "../utils/mockData";
+import axios from "axios";
 import "./Home.css"
 
 function Home() {
@@ -17,6 +18,22 @@ function Home() {
         setAllVideos(filteredVideos);
     }, [searchQuery])
 
+    const user = JSON.parse(localStorage.getItem("user"));
+    const channelId = user?.[3]?.[0];
+    console.log(channelId);
+
+    useEffect(() => {
+        async function getChannelData() {
+            try {
+                const response = await axios.get(`http://localhost:3000/${channelId}/getChannel`);
+                response.data.channelBanner && localStorage.setItem("channelBanner", response.data.channelBanner);
+            } catch (err) {
+                console.err(err);
+            }
+        }
+
+        getChannelData();
+    }, [])
 
     return (
         <div className="">

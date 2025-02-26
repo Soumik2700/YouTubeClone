@@ -15,11 +15,39 @@
     }
 }
 
-.remainingVideoOverflow{
+.remainingVideo{
     overflow-y: scroll;
     scrollbar-width: thin;
     scroll-behavior: smooth;
     scrollbar-color: gray ;
     scrollbar-color: gray var(--color-gray-900);
     
+}
+
+
+
+.likeBtn{
+    /* px-1.5 border-r hover: text-gray-400 transition duration-200 */
+    padding: 0 10px 0 10px;
+    border-right: thin white solid;
+    transition: all 200ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+.likeBtn:hover{
+    color: var(--color-gray-400);
+}
+.dislikeBtn{
+    /* px-1.5 hover: text-gray-400 transition duration-200 */
+    padding: 0 10px 0 10px;
+    transition: all 200ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+.dislikeBtn:hover{
+    color: var(--color-gray-400);
 }

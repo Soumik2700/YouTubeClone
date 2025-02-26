@@ -7,14 +7,16 @@
 
 @media (max-width: 768px) {
     .search-container {
-        width: 60%;
+        width: 40%;
     }
 }
 
 @media (max-width: 480px) {
     .search-container {
         width: 90%;
+        margin: 10px 0 0 10px;
     }
+    
 
     /* Stack header items for small screens */
     .header {
@@ -24,7 +26,40 @@
     }
 
     .sign-in {
-        width: 100%;
+        width: 70%;
         justify-content: center;
+    }
+}
+
+.createVideoBtn {
+    padding: 0 15px;
+    border: thin rgba(255, 255, 255, 0.5) solid;
+    border-radius: 25px;
+    /* background-color: transparent; */
+    /* Set initial background to transparent */
+    transition: background-color 0.2s ease-in-out;
+    /* Smooth transition */
+}
+
+.createVideoBtn:hover {
+    background-color: var(--color-gray-700);
+}
+
+.signInLogo{
+    font-size: 60px;
+}
+
+@media(min-width:768px){
+    .signInLogo{
+        font-size: var(--text-2xl)
+                /* 1.5rem = 24px */
+            ;
+            line-height: var(--tw-leading, var(--text-2xl--line-height)
+                    /* calc(2 / 1.5) ≈ 1.3333 */
+                );
+    }
+
+    .sign-in{
+        padding: 10px;
     }
 }

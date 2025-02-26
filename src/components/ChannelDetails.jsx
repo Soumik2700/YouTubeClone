@@ -1,7 +1,5 @@
 import "./ChannelDetails.css";
 import { useEffect, useState } from "react";
-import videos from "../utils/mockData";
-import channel from "../utils/mockChannelData";
 import ChannelVideo from "./ChannelVideo";
 import axios from "axios";
 
@@ -37,39 +35,30 @@ function ChannelDetails() {
 
     },[Id])
 
-    // useEffect(()=>{
-    //     async function getChannelVideos(){
-    //        try{
-               
-    //        }catch(err){
-    //         console.log(err.message);
-    //        }
-    //     }
-
-    //     getChannelVideos();
-    // },[Id])
-
-    // console.log(channelVideos);
     return (
         <>
             <main className="min-h-screen bg-gray-900 border channelDetails">
                 {/* Channel Banner */}
                 <section className="p-5 flex justify-center">
-                    <img
-                        className="channelBanner"
-                        src={channelBanner}
-                        alt="Channel Banner"
-                    />
+                    {channelBanner ? (
+                        <img className="channelBanner" src={channelBanner} alt="Channel Banner" />
+                    ) : (
+                        <div className="w-full h-[300px] bg-gray-700 flex items-center justify-center text-white">
+                            No Banner Available
+                        </div>
+                    )}
                 </section>
 
                 {/* Channel Profile and Info */}
                 <section className="flex flex-col items-center mt-5 text-center">
-                    <img
-                        className="channelProfile"
-                        src={channelBanner}
-                        alt="Channel Profile"
-                    />
-                    <h2 className="text-3xl font-bold mt-3 overflow-hidden">{channelName}</h2>
+                    {channelBanner ? (
+                        <img className="channelProfile" src={channelBanner} alt="Channel Profile" />
+                    ) : (
+                        <div className="w-[100px] h-[100px] bg-gray-700 rounded-full flex items-center justify-center text-white">
+                            No Profile
+                        </div>
+                    )}
+                    <h2 className="text-3xl font-bold mt-3 overflow-hidden">{channelName || "Channel Name"}</h2>
                     <p className="text-gray-400">subscribers</p>
                     <button className="subscribeBtn">Subscribe</button>
                 </section>
@@ -94,7 +83,7 @@ function ChannelDetails() {
                 </section>
                 <section className="channelVideos">
                     {channelVideos.length > 0 ? (
-                        channelVideos.map(video => <ChannelVideo key={video.videoId} video={video} />)
+                        channelVideos.map(video => <ChannelVideo key={video.videoId} video={video} channelName = {channelName}/>)
                     ) : (
                         <p className="text-gray-500 text-center mt-5">No videos uploaded yet.</p>
                     )}

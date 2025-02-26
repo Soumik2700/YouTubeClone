@@ -19,9 +19,13 @@ const videoSchema = mongoose.Schema({
         type:String,
         required: true
     },
+    description:{
+        type:String,
+        required:true
+    },
     uploader:{
         type:mongoose.Schema.Types.ObjectId, 
-        ref:"User",
+        ref:"Channel",
         required:true
     },
     views:{
@@ -36,24 +40,26 @@ const videoSchema = mongoose.Schema({
         type:Number,
         default:0
     },
-    uploadDate:{
-        type:String,
-        default:()=> new Date().toDateString().split("T")[0]
+    uploadDate: {
+        type: String,
+        default: () => new Date().toDateString()
     },
-    comment:{
-        userId:{
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"User"
-        },
-        text:{
-            type:String,
-            required:true
-        },
-        timestamp:{
-            type:Date,
-            default: Date.now
-        }
-    }
+    comment:[
+       {
+            userId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Channel"
+            },
+            text: {
+                type: String,
+                required: true
+            },
+            timestamp: {
+                type: Date,
+                default: Date.now
+            }
+       },
+    ]
 },{timestamp:true})
 
 const Video = new mongoose.model("Video", videoSchema);

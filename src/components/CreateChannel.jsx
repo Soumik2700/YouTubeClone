@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./CreateChannel.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useOutletContext } from "react-router-dom";
 
 function CreateChannel() {
     const [channelName, setChannelName] = useState("");
@@ -14,6 +13,7 @@ function CreateChannel() {
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("user"));
         if (user && user[3].length > 0) {
+            setHasChannelCreated(true);
             navigate(`/${user[0]}/channelDetails`); // Redirect to channel details
         }
     }, [navigate]);

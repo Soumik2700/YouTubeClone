@@ -51,3 +51,31 @@ export async function getChannelInfo(req, res) {
         res.status(200).json({ message: err.message });
     }
 }
+
+export async function updateProfilePicture(req, res){
+    const channelId = req.params.channelId;
+    const {channelBanner} = req.body;
+
+    if(!channelBanner){
+        return res.status(400).json({message:"Please provide a image url!"});
+    }
+
+    try{
+        const channel = await Channel.findOne({_id:channelId});
+
+        if(!channel){
+            return res.status(404).json({message:"No channel found!"});
+        }
+
+        channel.channelBanner = channelBanner;
+        const savedChannel = await channel.save()
+
+        if(!savedChannel){
+            res.status(400).json({message:"Oops! Channel not saved sucessfully!"})
+        }
+
+        res.send(savedChannel.channelBanner);
+    }catch(err){
+        res.status(500).json({message: err.message});
+    }
+}

@@ -12,6 +12,7 @@ function SignIn() {
     const navigate = useNavigate();
     const { isLogin, setIsLogin } = useOutletContext();
     const [messageText, setMessageText] = useState("")
+   
 
     async function handelSubmit(event) {
         event.preventDefault();
@@ -42,7 +43,7 @@ function SignIn() {
                 }, 3000);
             }
 
-            console.log(response.data);
+            // console.log(response.data);
 
             const { userId ,email, username, channels, avatar } = response.data;
             const user = [userId, username, email, channels, avatar];

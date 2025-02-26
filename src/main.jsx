@@ -9,6 +9,7 @@ import ChannelDetails from './components/ChannelDetails.jsx'
 import ProtectedRoutes from './components/ProtectedRoutes.jsx'
 import CreateChannel from './components/CreateChannel.jsx'
 import ErrorElement from './components/ErrorElement.jsx'
+import CreateVideo from './components/CreateVideo.jsx'
 
 const appRouter = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const appRouter = createBrowserRouter([
           {
             path: "createChannel",
             element: <CreateChannel />
+          },
+          {
+            path:"createVideo",
+            element:<CreateVideo/>
           }
         ]
       }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { PiUserCircle } from "react-icons/pi";
 import { IoSearchOutline } from "react-icons/io5";
 import HeaderLogo from "../assets/youtubeicon.png"
@@ -12,6 +12,8 @@ function Header({ setSearchQuery, isLogin }) {
     const [search, setSearch] = useState("");
     const [isClicked, setIsClicked] = useState(false);
     const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem("user"))
+    const name = user && user[1]?.split(" ")[0];
 
     function handelSearch() {
         setSearchQuery(search.trim());
@@ -43,7 +45,7 @@ function Header({ setSearchQuery, isLogin }) {
             {/* Logo */}
             <h1 className="text-xl font-bold flex p-2 items-center gap-3">
                 <div className="flex w-full h-full items-center ml-9 gap-1">
-                    <Link className="opacity-0 md:opacity-100"><img className="w-10 h-10" src={HeaderLogo} alt="" /></Link>
+                    <Link className="hidden md:block"><img className="w-10 h-10" src={HeaderLogo} alt="" /></Link>
                     <Link className="hidden md:contents" to="/" onClick={() => {
                         navigate("/");
                         window.location.reload();
@@ -69,11 +71,17 @@ function Header({ setSearchQuery, isLogin }) {
             </section>
 
             {/* Sign In Button */}
-            <div className="signInBtn overflow-hidden">
-                <button className="relative flex items-center gap-2 px-5 py-2 mr-9 rounded-full md:border md:border-gray-300 hover:bg-gray-800 transition" onClick={handelSignClick}>
+            <div className="signInBtn overflow-hidden flex gap-3">
+                {
+                    (user && user[3].length > 0) && <Link className="createVideoBtn hidden md:flex items-center cursor-pointer" to={`/${name}/createVideo`}>
+                        <span>Create +</span>
+                    </Link>
+                    
+                }
+                <button className="sign-in relative flex items-center gap-2 px-5 md:px-0 ml-1 mt-1 md:ml-0 md:mr-4 rounded-full md:border md:border-gray-300 hover:bg-gray-800 transition md:bg-gray-700" onClick={handelSignClick}>
                     {
                         isLogin ? JSON.parse(localStorage.getItem("user"))[1].split(" ")[0] : <>
-                            <PiUserCircle className="text-3xl" />
+                            <PiUserCircle className="signInLogo text-2xl" />
                             <span className="signInText">Sign in</span>
                         </>
                     }
@@ -87,3 +95,5 @@ function Header({ setSearchQuery, isLogin }) {
 }
 
 export default Header;
+
+

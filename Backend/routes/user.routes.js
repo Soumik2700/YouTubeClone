@@ -1,6 +1,6 @@
 import { createUser, getUsers, loginUser, } from "../controller/user.controller.js";
 import { verifyToken } from "../middlewares/mid.varifyToken.js";
-import { createChannel, getChannelInfo } from "../controller/channel.controller.js";
+import { createChannel, getChannelInfo, updateProfilePicture } from "../controller/channel.controller.js";
 import { createVideo, getChannelVideos } from "../controller/video.controller.js";
 
 export function routes(app) {
@@ -11,9 +11,10 @@ export function routes(app) {
         res.json({ message: "Access Granted!" });
     });
     app.post("/user/createchannel", createChannel);
-    app.post("/:channelId/createVideo", createVideo);
+    app.post("/:channelId/createVideo", verifyToken ,createVideo);
     app.get("/:id/getChannel", getChannelInfo);
     app.get("/:channelId/getChannelVideos", getChannelVideos);
+    app.put("/:channelId/updateProfilePicture",verifyToken ,updateProfilePicture)
 }
 
 

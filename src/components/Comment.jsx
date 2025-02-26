@@ -20,7 +20,7 @@ function Comment({ comment, onEdit, setCommentId }) {
     }, [isClickedEdit, editComment, onEdit]);
 
     return (
-        <div className="m-3 p-3 bg-gray-800 rounded-lg shadow-md">
+        <div className="m-3 p-3 bg-gray-900 rounded-lg">
             {/* Commenter Info */}
             <div className="flex items-center gap-3 mb-2">
                 <div className="bg-gray-600 w-10 h-10 flex items-center justify-center rounded-full">
@@ -28,7 +28,7 @@ function Comment({ comment, onEdit, setCommentId }) {
                 </div>
                 <div>
                     <h2 className="text-white font-semibold">{comment.userId}</h2>
-                    <p className="text-gray-400 text-xs">{new Date(comment.timestamp).toLocaleString()}</p>
+                    <p className="text-xs">{new Date(comment.timestamp).toLocaleString()}</p>
                 </div>
             </div>
 
@@ -42,11 +42,11 @@ function Comment({ comment, onEdit, setCommentId }) {
                     autoFocus
                 />
             ) : (
-                <p className="text-white p-2 bg-gray-700 rounded-lg">{comment.text}</p>
+                <p className="text-white p-2 rounded-lg text-[10px]">{comment.text}</p>
             )}
 
             {/* Edit & Delete Buttons */}
-            <div className="flex justify-end gap-3 mt-2">
+            <div className="flex justify-end gap-3 mt-2 text-[10px]">
                 <button
                     onClick={(e) => {
                         e.stopPropagation();
@@ -55,15 +55,15 @@ function Comment({ comment, onEdit, setCommentId }) {
                     }}
                     className="flex items-center gap-1 text-blue-400 hover:text-blue-300 transition duration-200"
                 >
-                    <MdModeEdit size={18} />
-                    <span className="text-sm">Edit</span>
+                    <MdModeEdit />
+                    <span className="">Edit</span>
                 </button>
                 <button
                     onClick={() => setCommentId(comment.commentId)}
                     className="flex items-center gap-1 text-red-400 hover:text-red-300 transition duration-200"
                 >
-                    <MdOutlineDelete size={18} />
-                    <span className="text-sm">Delete</span>
+                    <MdOutlineDelete />
+                    <span className="">Delete</span>
                 </button>
             </div>
         </div>

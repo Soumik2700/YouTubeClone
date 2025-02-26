@@ -8,7 +8,7 @@ function Sidebar({ isOpen, setIsOpen }) {
             {/* Menu Icon - Stays Fixed */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="absolute top-6 md:top-5 left-4 p-2 text-white rounded-full"
+                className="absolute top-5 md:top-5 left-4 p-3 md:p-2 text-white rounded-full"
             >
                 <HiMenu size={30} />
             </button>

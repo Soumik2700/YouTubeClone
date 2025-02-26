@@ -25,11 +25,21 @@
 
 .channelVideos{
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
     grid-gap: 20px;
     padding: 40px;
     border-top: 1px solid;
     margin-top: 20px;
+}
+@media(min-width:768px){
+    .channelVideos{
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+@media(min-width:1024px) {
+    .channelVideos {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
 }
 .subscribeBtn{
     /* w-25 h-10 bg-amber-50 text-gray-900 font-bold */
