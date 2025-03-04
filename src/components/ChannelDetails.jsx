@@ -9,6 +9,7 @@ function ChannelDetails() {
     const [channelName, setChannelName] = useState("");
     const [description, setDescription] = useState("");
     const [channelVideos, setChannelVideos] = useState([]);
+    const [hasDeleted, setHasDeleted] = useState(false);
     const Id = JSON.parse(localStorage.getItem("user"))[3][0];
     // console.log(Id);
 
@@ -33,7 +34,7 @@ function ChannelDetails() {
 
        fetchChannel();
 
-    },[Id])
+    },[Id, hasDeleted])
 
     return (
         <>
@@ -81,9 +82,10 @@ function ChannelDetails() {
                         {isMoreClicked ? "Show Less" : "More..."}
                     </span>
                 </section>
+                
                 <section className="channelVideos">
                     {channelVideos.length > 0 ? (
-                        channelVideos.map(video => <ChannelVideo key={video.videoId} video={video} channelName = {channelName}/>)
+                        channelVideos.map(video => <ChannelVideo key={video.videoId} video={video} channelName = {channelName} setHasDeleted={setHasDeleted}/>)
                     ) : (
                         <p className="text-gray-500 text-center mt-5">No videos uploaded yet.</p>
                     )}

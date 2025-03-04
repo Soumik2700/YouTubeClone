@@ -9,6 +9,7 @@ function App() {
   const [searchQuery, setSearchQuery] = useState(null);
   const [isLogin, setIsLogin] = useState(false);
   const [hasChannelCreated, setHasChannelCreated] = useState(false);
+
   // console.log(searchQuery);
   // console.log(isLogin);
 

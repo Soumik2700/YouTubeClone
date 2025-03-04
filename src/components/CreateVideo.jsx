@@ -88,7 +88,7 @@ function CreateVideo() {
 
                 <div className="flex flex-col">
                     <label htmlFor="description">Video Description</label>
-                    <textarea className="w-full bg-gray-700 p-2 rounded-md text-white"
+                    <textarea className="w-full h-[300px] bg-gray-700 p-2 rounded-md text-white scrollBar"
                         placeholder="Enter description"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)} />

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./CreateChannel.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 function CreateChannel() {
     const [channelName, setChannelName] = useState("");
@@ -9,48 +9,59 @@ function CreateChannel() {
     const [channelBanner, setChannelBanner] = useState("");
     const navigate = useNavigate();
 
-    // ✅ Step 1: Prevent users from accessing if they already have a channel
+    // ✅ Ensure context is properly retrieved
+    const outletContext = useOutletContext();
+    const setHasChannelCreated = outletContext?.setHasChannelCreated || (() => { }); // Prevent errors if undefined
+
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("user"));
-        if (user && user[3].length > 0) {
+        if (user?.[3]?.length > 0) {
             setHasChannelCreated(true);
-            navigate(`/${user[0]}/channelDetails`); // Redirect to channel details
+            navigate(`/${user[1].split(" ")[0]}/channelDetails`);
         }
-    }, [navigate]);
+    }, [navigate, setHasChannelCreated]);
 
     async function handleCreateChannel() {
         if (!channelName || !channelDescription) {
-            alert("Channel name is required!");
+            alert("Channel name and description are required!");
             return;
         }
 
-        const owner = JSON.parse(localStorage.getItem("user"))[2]; // ✅ Use email (correct data for backend)
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (!user) {
+            alert("User not found! Please log in.");
+            navigate("/signIn");
+            return;
+        }
+
+        const owner = user[2];
 
         const channel = {
             channelName,
             description: channelDescription,
             channelBanner,
-            owner
+            owner,
         };
 
         try {
             const response = await axios.post("http://localhost:3000/user/createchannel", channel);
             console.log(response.data);
 
-            // ✅ Step 2: Extract `channelId` from response & update localStorage
-            const { _id: channelId } = response.data.channel;
-            const updatedUser = JSON.parse(localStorage.getItem("user"));
-            updatedUser[3].push(channelId); // ✅ Store `channelId` in the correct index
-            const name = updatedUser[1].split(" ")[0];
-            localStorage.setItem("user", JSON.stringify(updatedUser));
-            setHasChannelCreated(true);
+            if (response.data.message !== "Channel created sucessfully!") {
+                return alert(response.data.message);
+            }
 
-            // ✅ Step 3: Redirect to channel details
-            setTimeout(() => {
-                navigate(`/${name}/channelDetails`);
-            }, 2000);
+            const { _id } = response.data.channel;
+            console.log("Channel Created:", response.data.channel);
+
+            const updatedUser = { ...user };
+            updatedUser[3] = updatedUser[3] ? [...updatedUser[3], _id] : [_id];
+            localStorage.setItem("user", JSON.stringify(updatedUser));
+
+            setHasChannelCreated(true);
+            navigate(`/${updatedUser[1].split(" ")[0]}/channelDetails`);
         } catch (err) {
-            console.log(err.message);
+            console.error("Error creating channel:", err.message);
         }
     }
 
@@ -59,7 +70,6 @@ function CreateChannel() {
             <section className="createChannelSection">
                 <h1 className="title">Create Your Channel</h1>
 
-                {/* Channel Name */}
                 <div className="inputContainer">
                     <label className="inputLabel">Channel Name</label>
                     <input
@@ -71,7 +81,6 @@ function CreateChannel() {
                     />
                 </div>
 
-                {/* Channel Description */}
                 <div className="inputContainer">
                     <label className="inputLabel">Channel Description</label>
                     <textarea
@@ -82,7 +91,6 @@ function CreateChannel() {
                     />
                 </div>
 
-                {/* Channel Banner */}
                 <div className="inputContainer">
                     <label className="inputLabel">Channel Banner (Image URL)</label>
                     <input
@@ -94,7 +102,6 @@ function CreateChannel() {
                     />
                 </div>
 
-                {/* Create Channel Button */}
                 <button className="createButton" onClick={handleCreateChannel}>
                     Create Channel
                 </button>

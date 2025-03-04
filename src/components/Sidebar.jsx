@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import "./Sidebar.css";
 
 function Sidebar({ isOpen, setIsOpen }) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const name = user?.[1]?.split(" ")[0];
+
     return (
         <div className="flex">
             {/* Menu Icon - Stays Fixed */}
@@ -23,7 +26,7 @@ function Sidebar({ isOpen, setIsOpen }) {
                     className={`transition-all duration-300 ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
                 >
                     <Link to="/" onClick={()=>setIsOpen(false)}><li className="p-2">🏠 Home</li></Link>
-                    <li className="p-2">📺 My Channel</li>
+                    <Link to={`/${name}/channelDetails`}><li className="p-2">📺 My Channel</li></Link>
                     <li className="p-2">🔥 Trending</li>
                     <li className="p-2">🎵 Music</li>
                     <li className="p-2">🎮 Gaming</li>

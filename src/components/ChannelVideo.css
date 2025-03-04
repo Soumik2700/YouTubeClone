@@ -1,0 +1,7 @@
+.deleteBtn{
+    position: absolute;
+    right: 20px;
+    z-index: 1 !important;
+    padding: 50px;
+    overflow-y: hidden;
+}

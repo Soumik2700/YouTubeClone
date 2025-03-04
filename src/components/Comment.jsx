@@ -1,71 +1,112 @@
 import { MdModeEdit, MdOutlineDelete } from "react-icons/md";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import axios from "axios";
 
-function Comment({ comment, onEdit, setCommentId }) {
-    const [isClickedEdit, setIsClickEdit] = useState(false);
-    const [editComment, setEditComment] = useState(comment.text);
+function Comment({ comment, videoId, setHasSaved,hasDelete ,setHasDelete }) {
+    const channelBanner = comment.channelId.channelBanner;
+    const timeStamp = comment?.timestamp?.slice(0, 10).replaceAll("-", "/");
+    const [isEdit, setIsEdit] = useState(false);
+    const user = JSON.parse(localStorage.getItem("user"));
+    const channelId = user?.[3]?.[0];
+    const [text, setText] = useState(comment.text);
+    const authToken = localStorage.getItem("authToken");
 
-    useEffect(() => {
-        if (!isClickedEdit) return;
+    async function handelEdit() {
+        if (text === comment.text) {
+            setIsEdit(false); // No change, just exit edit mode
+            return;
+        }
 
-        const handleClickOutside = (event) => {
-            if (!event.target.closest(".edit-comment")) {
-                setIsClickEdit(false);
-                onEdit(comment.commentId, editComment);
-            }
+        const query = {
+            commentId: comment._id,
+            channelId,
+            text
         };
 
-        document.addEventListener("click", handleClickOutside);
-        return () => document.removeEventListener("click", handleClickOutside);
-    }, [isClickedEdit, editComment, onEdit]);
+        try {
+            const response = await axios.put(`http://localhost:3000/${videoId}/updateComment`, query,{
+                headers:{
+                    Authorization:`Bearer ${authToken}`
+                }
+            });
+            console.log(response.data);
+            setIsEdit(false); // Close edit mode after saving
+            setHasSaved(true)
+        } catch (err) {
+            console.error(err);
+            alert(err.message);
+        }
+    }
+
+    async function handelDelete() {
+        const query = {
+            commentId: comment._id,
+            channelId,
+            videoId
+        };
+
+        try {
+            const response = await axios.put(`http://localhost:3000/deleteComment`, query, {
+                headers: {
+                    Authorization: `Bearer ${authToken}`, // ✅ Fix headers format
+                    "Content-Type": "application/json"
+                }
+            });
+
+            setHasDelete(!hasDelete);
+        } catch (err) {
+            alert(err.response?.data?.message || err.message);
+        }
+    }
+
 
     return (
-        <div className="m-3 p-3 bg-gray-900 rounded-lg">
-            {/* Commenter Info */}
-            <div className="flex items-center gap-3 mb-2">
-                <div className="bg-gray-600 w-10 h-10 flex items-center justify-center rounded-full">
-                    <span className="text-white text-sm font-bold">{comment.userId[0].toUpperCase()}</span>
-                </div>
-                <div>
-                    <h2 className="text-white font-semibold">{comment.userId}</h2>
-                    <p className="text-xs">{new Date(comment.timestamp).toLocaleString()}</p>
+        <div className="m-3 p-1 rounded-lg text-[10px] flex-col border-b-[1px]">
+            {/* User Info */}
+            <div className="flex gap-1">
+                {channelBanner && <img className="bg-gray-900 w-7 h-7 rounded-[50%]" src={channelBanner} alt="" />}
+                <div className="text-[10px] font-bold">
+                    <h1>User</h1>
+                    <h1 className="text-[7px]">{timeStamp}</h1>
                 </div>
             </div>
 
             {/* Comment Text */}
-            {isClickedEdit ? (
-                <input
-                    className="w-full p-2 bg-gray-700 border border-gray-500 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gray-500"
-                    type="text"
-                    value={editComment}
-                    onChange={(e) => setEditComment(e.target.value)}
-                    autoFocus
-                />
-            ) : (
-                <p className="text-white p-2 rounded-lg text-[10px]">{comment.text}</p>
-            )}
+            <div className="text-[8px]">
+                {isEdit ? (
+                    <textarea value={text} onChange={(e) => setText(e.target.value)} />
+                ) : (
+                    <p>{comment.text}</p>
+                )}
+            </div>
 
             {/* Edit & Delete Buttons */}
-            <div className="flex justify-end gap-3 mt-2 text-[10px]">
-                <button
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        setIsClickEdit(true);
-                        setEditComment(comment.text);
-                    }}
-                    className="flex items-center gap-1 text-blue-400 hover:text-blue-300 transition duration-200"
-                >
-                    <MdModeEdit />
-                    <span className="">Edit</span>
-                </button>
-                <button
-                    onClick={() => setCommentId(comment.commentId)}
-                    className="flex items-center gap-1 text-red-400 hover:text-red-300 transition duration-200"
-                >
-                    <MdOutlineDelete />
-                    <span className="">Delete</span>
-                </button>
-            </div>
+            {comment.channelId._id === channelId && (
+                <div className="gap-1.5 flex float-right text-[7px]">
+                    {isEdit ? (
+                        <>
+                            <button className="flex items-center text-green-400" onClick={handelEdit}>
+                                <span>Save</span>
+                            </button>
+                            <button className="flex items-center text-gray-400" onClick={() => setIsEdit(false)}>
+                                <span>Cancel</span>
+                            </button>
+                        </>
+                    ) : (
+                        <button className="flex items-center text-blue-400" onClick={() => {
+                            setIsEdit(true);
+                            setHasSaved(false);
+                        }}>
+                            <span>Edit</span>
+                            <MdModeEdit />
+                        </button>
+                    )}
+                    <button className="flex items-center text-red-400" onClick={handelDelete}>
+                        <span>Delete</span>
+                        <MdOutlineDelete />
+                    </button>
+                </div>
+            )}
         </div>
     );
 }

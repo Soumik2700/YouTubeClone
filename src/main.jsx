@@ -10,6 +10,7 @@ import ProtectedRoutes from './components/ProtectedRoutes.jsx'
 import CreateChannel from './components/CreateChannel.jsx'
 import ErrorElement from './components/ErrorElement.jsx'
 import CreateVideo from './components/CreateVideo.jsx'
+import LoadingSpinner from './components/LoadingSpinner.jsx'
 
 const appRouter = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const appRouter = createBrowserRouter([
             element:<CreateVideo/>
           }
         ]
+      },
+      {
+        path:"/loading",
+        element: <LoadingSpinner/>
       }
     ],
     errorElement:<ErrorElement/>

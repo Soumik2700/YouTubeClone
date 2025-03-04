@@ -20,3 +20,32 @@
     row-gap: 20px;
     border-radius: 10px;
 }
+
+scrollBar/* Webkit-based browsers (Chrome, Edge, Safari) */
+.scrollBar::-webkit-scrollbar {
+    width: 8px;
+    /* Width of the scrollbar */
+}
+
+.scrollBar::-webkit-scrollbar-track {
+    background: var(--color-gray-800);
+    /* Track color */
+    border-radius: 10px;
+}
+
+.scrollBar::-webkit-scrollbar-thumb {
+    background: #888;
+    /* Scrollbar color */
+    border-radius: 10px;
+}
+
+.scrollBar::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Scrollbar color on hover */
+}
+
+/* Firefox */
+.scrollBar {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #2d2d2d;
+}
