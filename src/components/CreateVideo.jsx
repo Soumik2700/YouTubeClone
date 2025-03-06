@@ -38,8 +38,6 @@ function CreateVideo() {
                 }
             );
 
-            console.log("Video Created:", response.data);
-
             // Clear form fields after submission
             setTitle("");
             setThumbnailUrl("");

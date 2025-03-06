@@ -16,7 +16,6 @@ function ChannelInfo() {
     const imgUrl = localStorage.getItem("channelBanner");
 
     const channelId = user?.[3]?.[0];
-    console.log(channelId);
 
     function handelLogOut() {
         localStorage.removeItem("user");
@@ -24,18 +23,6 @@ function ChannelInfo() {
         localStorage.removeItem("channelBanner");
         window.location.reload();
     }
-
-    // useEffect(() => {
-    //     const userData = localStorage.getItem("user");
-    //     const parsedUser = userData ? JSON.parse(userData) : null;
-    //     setUser(parsedUser);
-    // }, []);
-
-    // useEffect(() => {
-    //     if (user.length > 0) {
-    //         setName(parsedUser ? parsedUser[1] : "Guest"); // Extract first name safely
-    //     }
-    // }, [user]);
 
     async function handelUpdatePhoto() {
         if (!channelBanner) {
@@ -50,7 +37,6 @@ function ChannelInfo() {
             );
 
             const updatedBanner = response.data.channelBanner; // ✅ Extract new banner URL
-            console.log("Updated Banner:", updatedBanner);
 
             if (updatedBanner) {
                 localStorage.setItem("channelBanner", updatedBanner); // ✅ Update localStorage
@@ -64,7 +50,6 @@ function ChannelInfo() {
         }
     }
 
-    console.log("Name", name)
     useEffect(() => {
         const channelId = JSON.parse(localStorage.getItem("user"))?.[3]?.[0];
 
@@ -76,22 +61,19 @@ function ChannelInfo() {
                 });
 
                 const fetchedBanner = response.data.channelBanner; // ✅ Extract banner URL
-                console.log("Fetched Channel Banner:", fetchedBanner);
 
                 if (fetchedBanner) {
                     localStorage.setItem("channelBanner", fetchedBanner); // ✅ Update localStorage
                     setChannelBanner(fetchedBanner); // ✅ Update state
                 }
             } catch (err) {
-                console.log(err);
+                console.error(err);
             }
         }
 
         getChannelBanner();
     }, []);
 
-
-    // console.log("userName", name);
     return (
         <>
             <div className="channelInfo transition duration-200">

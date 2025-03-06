@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 const VideoPlayer = ({ video }) => {
     const [isPlaying, setIsPlaying] = useState(false);
-    console.log(video);
     return (
         <Link to={`videoDetails/${video._id}`}>
             <div className="relative w-full max-w-md">

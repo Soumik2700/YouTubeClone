@@ -21,8 +21,6 @@ function Home() {
                 params: { search: searchQuery, category: selectedCategory, page, limit: 12 }
             });
 
-            console.log("Fetched Videos:", response.data);
-
             const newVideos = response.data.videos.filter(
                 video => !allVideos.some(v => v.videoId === video.videoId)
             );

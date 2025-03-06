@@ -30,14 +30,11 @@ function VideoDetails() {
         description: "",
         channelId: channelId || ""  // ✅ Ensure `channelId` is included
     });
-    console.log("video",video);
-    // console.log("remaining Videos", remainingVideos);
 
     useEffect(() => {
         async function fetchVideoDetails() {
             try {
                 const response = await axios.get(`http://localhost:3000/${id}/video`);
-                // console.log(response.data);
                 setVideo(response.data);
                 setComments(response.data.comment);
             } catch (err) {
@@ -49,7 +46,7 @@ function VideoDetails() {
     }, [id, hasComment, hasSaved, hasDelete, isSubscribed, isEditing]);
 
     useEffect(() => {
-        console.log("exclude id", id);
+
         async function fetchRemainingVideos() {
             try {
                 const response = await axios.get(`http://localhost:3000/remainingVideos`, {
@@ -93,7 +90,7 @@ function VideoDetails() {
             setTextArea("");
             document.querySelector(".commentText").value = "";
         }catch(err){
-            console.log(err);
+            console.error(err);
         }
     }
 
@@ -187,8 +184,6 @@ function VideoDetails() {
         try {
             // ✅ Ensure `channelId` is correctly assigned before sending the request
             const updatedData = { ...editData, channelId };
-
-            console.log("Submitting Edit Data:", updatedData);
 
             const response = await axios.put(
                 `http://localhost:3000/api/videos/${id}/edit`,

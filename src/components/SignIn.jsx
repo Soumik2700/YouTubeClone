@@ -43,8 +43,6 @@ function SignIn() {
                 }, 3000);
             }
 
-            // console.log(response.data);
-
             const { userId ,email, username, channels, avatar } = response.data;
             const user = [userId, username, email, channels, avatar];
 
@@ -56,7 +54,6 @@ function SignIn() {
             }
 
         } catch (err) {
-            // console.log("Error", err);
             alert(err.response?.data?.message || "Something went wrong!");
         }
     }

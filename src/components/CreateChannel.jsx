@@ -45,14 +45,12 @@ function CreateChannel() {
 
         try {
             const response = await axios.post("http://localhost:3000/user/createchannel", channel);
-            console.log(response.data);
 
             if (response.data.message !== "Channel created sucessfully!") {
                 return alert(response.data.message);
             }
 
             const { _id } = response.data.channel;
-            console.log("Channel Created:", response.data.channel);
 
             const updatedUser = { ...user };
             updatedUser[3] = updatedUser[3] ? [...updatedUser[3], _id] : [_id];

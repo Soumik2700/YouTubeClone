@@ -10,8 +10,6 @@ function ChannelVideo({ video, channelName, setHasDeleted}) {
     const user = JSON.parse(localStorage.getItem("user"));
     const channelId = video?.uploader;
     const myChannelId = user?.[3]?.[0];
-    console.log("channel video", video);
-    console.log("channelId ", channelId, " mychannelid ", myChannelId);
 
     async function handelDelete(){
         try{
@@ -20,8 +18,7 @@ function ChannelVideo({ video, channelName, setHasDeleted}) {
                     Authorization: `Bearer ${authToken}`
                 }
             });
-
-            // console.log("delete response", response);
+            
             if (response.data.message !== "Video deleted sucessfully"){
                 return alert(response.data.message);
             }else{

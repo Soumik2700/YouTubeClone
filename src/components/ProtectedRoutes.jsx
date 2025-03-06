@@ -23,8 +23,7 @@ function ProtectedRoutes() {
                         Authorization: `Bearer ${authToken}`,
                     },
                 });
-
-                console.log("Token Verified:", response.data);
+                
                 setIsVerified(true);
             } catch (err) {
                 console.error("Token validation failed:", err.response?.data?.message || err.message);

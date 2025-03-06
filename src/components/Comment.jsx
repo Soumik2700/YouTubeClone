@@ -10,7 +10,6 @@ function Comment({ comment, videoId, setHasSaved,hasDelete ,setHasDelete }) {
     const channelId = user?.[3]?.[0];
     const [text, setText] = useState(comment.text);
     const authToken = localStorage.getItem("authToken");
-    console.log("comment", comment);
 
     async function handelEdit() {
         if (text === comment.text) {
@@ -30,7 +29,7 @@ function Comment({ comment, videoId, setHasSaved,hasDelete ,setHasDelete }) {
                     Authorization:`Bearer ${authToken}`
                 }
             });
-            console.log(response.data);
+
             setIsEdit(false); // Close edit mode after saving
             setHasSaved(true)
         } catch (err) {

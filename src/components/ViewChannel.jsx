@@ -25,7 +25,6 @@ function ViewChannel() {
         const fetchChannel = async () => {
             try {
                 const response = await axios.get(`http://localhost:3000/${channelId}/getChannel`);
-                console.log("Channel Data", response.data);
 
                 const { channelBanner, channelName, description, subscriber } = response.data;
                 setChannelBanner(channelBanner);
@@ -39,7 +38,7 @@ function ViewChannel() {
                 const videoRes = await axios.get(`http://localhost:3000/${channelId}/getChannelVideos`);
                 setChannelVideos(videoRes.data);
             } catch (err) {
-                console.log(err.message);
+                console.error(err.message);
             }
         };
 
