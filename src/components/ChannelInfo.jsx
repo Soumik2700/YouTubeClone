@@ -5,16 +5,18 @@ import { MdPhotoCamera } from "react-icons/md";
 import axios from "axios";
 
 function ChannelInfo() {
-    const [user, setUser] = useState([]);
-    const [name, setName] = useState("");
+    // const [user, setUser] = useState([]);
+    // const [name, setName] = useState("");
+    const user = JSON.parse(localStorage.getItem("user"))
+    const name = user?.[1]?.split(" ")[0];
     const [channelBanner, setChannelBanner] = useState("");
     const [hasProfileImage, setHasProfileImage] = useState(false)
     const [isClicked, setIsClicked] = useState(false);
     const authToken = localStorage.getItem("authToken");
-    const imgUrl = localStorage.getItem("channelBanner")
+    const imgUrl = localStorage.getItem("channelBanner");
 
     const channelId = user?.[3]?.[0];
-    // console.log(channelId);
+    console.log(channelId);
 
     function handelLogOut() {
         localStorage.removeItem("user");
@@ -23,16 +25,17 @@ function ChannelInfo() {
         window.location.reload();
     }
 
-    useEffect(() => {
-        const storedUser = JSON.parse(localStorage.getItem("user")) || [];
-        setUser(storedUser);
-    }, []);
+    // useEffect(() => {
+    //     const userData = localStorage.getItem("user");
+    //     const parsedUser = userData ? JSON.parse(userData) : null;
+    //     setUser(parsedUser);
+    // }, []);
 
-    useEffect(() => {
-        if (user.length > 0) {
-            setName(user[1]?.split(" ")[0]); // Extract first name safely
-        }
-    }, [user]);
+    // useEffect(() => {
+    //     if (user.length > 0) {
+    //         setName(parsedUser ? parsedUser[1] : "Guest"); // Extract first name safely
+    //     }
+    // }, [user]);
 
     async function handelUpdatePhoto() {
         if (!channelBanner) {
@@ -40,25 +43,55 @@ function ChannelInfo() {
             return setIsClicked(false);
         }
         try {
-            const response = await axios.put(`http://localhost:3000/${channelId}/updateProfilePicture`, {
-                channelBanner
-            },
-                {
-                    headers: {
-                        Authorization: `Bearer ${authToken}`
-                    }
-                }
-            )
+            const response = await axios.put(
+                `http://localhost:3000/${channelId}/updateProfilePicture`,
+                { channelBanner },
+                { headers: { Authorization: `Bearer ${authToken}` } }
+            );
 
-            localStorage.setItem("channelBanner", response.data);
+            const updatedBanner = response.data.channelBanner; // ✅ Extract new banner URL
+            console.log("Updated Banner:", updatedBanner);
+
+            if (updatedBanner) {
+                localStorage.setItem("channelBanner", updatedBanner); // ✅ Update localStorage
+                setChannelBanner(updatedBanner); // ✅ Update state
+            }
         } catch (err) {
-            console.err(err.message);
+            console.error(err.message);
         } finally {
-            setIsClicked(!isClicked);
-            setHasProfileImage(!hasProfileImage);
+            setIsClicked(false);
+            setHasProfileImage(true);
         }
     }
 
+    console.log("Name", name)
+    useEffect(() => {
+        const channelId = JSON.parse(localStorage.getItem("user"))?.[3]?.[0];
+
+        async function getChannelBanner() {
+            if (!channelId) return;
+            try {
+                const response = await axios.get(`http://localhost:3000/${channelId}/getChannelBanner`, {
+                    headers: { Authorization: `Bearer ${authToken}` }
+                });
+
+                const fetchedBanner = response.data.channelBanner; // ✅ Extract banner URL
+                console.log("Fetched Channel Banner:", fetchedBanner);
+
+                if (fetchedBanner) {
+                    localStorage.setItem("channelBanner", fetchedBanner); // ✅ Update localStorage
+                    setChannelBanner(fetchedBanner); // ✅ Update state
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+        getChannelBanner();
+    }, []);
+
+
+    // console.log("userName", name);
     return (
         <>
             <div className="channelInfo transition duration-200">

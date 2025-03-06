@@ -5,8 +5,11 @@ import { MdOutlineDelete } from "react-icons/md";
 import "./ChannelVideo.css"
 import axios from "axios";
 
-function ChannelVideo({ video, channelName, setHasDeleted}) {
+function ChannelVideo({ video, channelName, setHasDeleted, channelId}) {
     const authToken = localStorage.getItem("authToken");
+    const user = JSON.parse(localStorage.getItem("user"));
+    const myChannelId = user?.[3]?.[0];
+    console.log("channel video", video);
 
     async function handelDelete(){
         try{
@@ -40,16 +43,18 @@ function ChannelVideo({ video, channelName, setHasDeleted}) {
                 <div className="flex flex-col">
                     <h1 className="text-md font-bold">{video.title}</h1>
                     <h1 className="text-white opacity-45 text-sm">
-                        {channelName} • {video.likes > 1000000 ?
-                            (video.likes / 1000000).toFixed(1) + "M" :
-                            video.likes > 1000 ? (video.likes / 1000).toFixed(1) + "K" : video.likes}
+                        {channelName} • {video?.likes?.length >= 1000000 && (video?.likes?.length / 1000000) + "M" || video?.likes?.length >= 1000 && (video?.likes?.length / 1000) + "K" || video?.likes?.length > 0 && video?.likes?.length || 0}
                     </h1>
                 </div>
 
                 {/* Three Dots Menu */}
-                <div className="relative flex w-[30%] justify-center items-center">
-                    <button className="p-1 rounded-full hover:bg-gray-500" onClick={handelDelete}><MdOutlineDelete/></button>
-                </div>
+                {
+                    channelId === myChannelId && (
+                        <div className="relative flex w-[30%] justify-center items-center">
+                            <button className="p-1 rounded-full hover:bg-gray-500" onClick={handelDelete}><MdOutlineDelete /></button>
+                        </div>
+                    )
+                }
             </div>
         </div>
     );

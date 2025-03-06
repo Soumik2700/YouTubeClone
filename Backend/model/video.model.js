@@ -32,17 +32,11 @@ const videoSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
-    likes: {
-        type: Number,
-        default: 0
-    },
-    dislikes: {
-        type: Number,
-        default: 0
-    },
+    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User", default: [] }],  // ✅ Default empty array
+    dislikes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User", default: [] }],
     uploadDate: {
-        type: String,
-        default: () => new Date().toDateString()
+        type: Date,  // ✅ Use Date instead of String
+        default: Date.now
     },
     comment: [
         {
@@ -60,8 +54,8 @@ const videoSchema = mongoose.Schema({
             }
         },
     ]
-}, { timestamp: true })
+}, { timestamps: true });  // ✅ Use timestamps: true
 
-const Video = new mongoose.model("Video", videoSchema);
+const Video = mongoose.model("Video", videoSchema);
 
 export default Video;

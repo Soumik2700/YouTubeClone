@@ -78,10 +78,10 @@ function Header({ setSearchQuery, isLogin }) {
                     </Link>
                     
                 }
-                <button className="sign-in relative flex items-center gap-2 px-5 md:px-0 ml-1 mt-1 md:ml-0 md:mr-4 rounded-full md:border md:border-gray-300 hover:bg-gray-800 transition md:bg-gray-700" onClick={handelSignClick}>
+                <button className={`sign-in relative flex items-center gap-2 md:px-0 ml-1 mt-1 md:ml-0 md:mr-4 rounded-full md:border md:border-gray-300 hover:bg-gray-800 transition md:bg-gray-700 ${isLogin && "pr-8 px-1"}`} onClick={handelSignClick}>
                     {
                         isLogin ? JSON.parse(localStorage.getItem("user"))[1].split(" ")[0] : <>
-                            <PiUserCircle className="signInLogo text-2xl" />
+                            <PiUserCircle className="signInLogo text-4xl" />
                             <span className="signInText">Sign in</span>
                         </>
                     }

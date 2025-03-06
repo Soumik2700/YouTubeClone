@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Channel from "../model/channel.model.js";
 import User from "../model/user.model.js";
+import Video from "../model/video.model.js";
 
 export async function createChannel(req, res) {
     const { channelName, description, channelBanner, owner } = req.body;
@@ -86,6 +87,27 @@ export async function updateProfilePicture(req, res) {
     }
 }
 
+export async function getChannelBanner(req, res) {
+    const channelId = req.params.id;
+
+    if (!channelId) {
+        return res.status(400).json({ message: "ChannelId is required!" });
+    }
+
+    try {
+        const channel = await Channel.findById(channelId);
+
+        if (!channel) {
+            return res.status(404).json({ message: "No channel found!" });
+        }
+
+        res.status(200).json({ channelBanner: channel.channelBanner });  // ✅ Return JSON response
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
+
+
 export async function checkSubscriptionStatus(req, res) {
     const channelId = req.params.id;
     const { userId } = req.query;  // Correct way to get userId in GET requests
@@ -127,8 +149,6 @@ export async function updateSubscriber(req, res) {
         }
 
         const userObjectId = new mongoose.Types.ObjectId(userId);
-
-        // Use `some()` instead of `findIndex()`
         const isSubscribed = channel.subscriber.some(sub => sub.equals(userObjectId));
 
         if (!isSubscribed) {
@@ -138,6 +158,7 @@ export async function updateSubscriber(req, res) {
         }
 
         await channel.save();
+
         return res.status(200).json({
             message: isSubscribed ? "Unsubscribed successfully!" : "Subscribed successfully!",
             subscribed: !isSubscribed,
@@ -148,3 +169,6 @@ export async function updateSubscriber(req, res) {
         res.status(500).json({ message: err.message });
     }
 }
+
+
+

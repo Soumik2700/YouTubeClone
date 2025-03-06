@@ -1,16 +1,20 @@
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
-import Home from './components/Home.jsx'
-import VideoDetails from './components/VideoDetails.jsx'
-import SignIn from './components/SignIn.jsx'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import ChannelDetails from './components/ChannelDetails.jsx'
-import ProtectedRoutes from './components/ProtectedRoutes.jsx'
-import CreateChannel from './components/CreateChannel.jsx'
-import ErrorElement from './components/ErrorElement.jsx'
-import CreateVideo from './components/CreateVideo.jsx'
-import LoadingSpinner from './components/LoadingSpinner.jsx'
+import { createRoot } from 'react-dom/client';
+import { Suspense, lazy } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import './index.css';
+import App from './App.jsx';
+import Home from './components/Home.jsx';
+import ProtectedRoutes from './components/ProtectedRoutes.jsx';
+import LoadingSpinner from './components/LoadingSpinner.jsx';
+
+// Lazy Loading Components
+const VideoDetails = lazy(() => import('./components/VideoDetails.jsx'));
+const SignIn = lazy(() => import('./components/SignIn.jsx'));
+const ViewChannel = lazy(() => import('./components/ViewChannel.jsx'));
+const ChannelDetails = lazy(() => import('./components/ChannelDetails.jsx'));
+const CreateChannel = lazy(() => import('./components/CreateChannel.jsx'));
+const CreateVideo = lazy(() => import('./components/CreateVideo.jsx'));
+const ErrorElement = lazy(() => import('./components/ErrorElement.jsx'));
 
 const appRouter = createBrowserRouter([
   {
@@ -23,39 +27,71 @@ const appRouter = createBrowserRouter([
       },
       {
         path: '/videoDetails/:id',
-        element: <VideoDetails />
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <VideoDetails />
+          </Suspense>
+        )
       },
       {
-        path:"/signIn",
-        element:<SignIn/>
+        path: '/signIn',
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <SignIn />
+          </Suspense>
+        )
       },
       {
-        path:"/:user",
+        path: '/viewChannel/:channelId',
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <ViewChannel />
+          </Suspense>
+        )
+      },
+      {
+        path: '/:user',
         element: <ProtectedRoutes />,
-        children:[
+        children: [
           {
-            path:"channelDetails",
-            element:<ChannelDetails/>
+            path: 'channelDetails',
+            element: (
+              <Suspense fallback={<LoadingSpinner />}>
+                <ChannelDetails />
+              </Suspense>
+            )
           },
           {
-            path: "createChannel",
-            element: <CreateChannel />
+            path: 'createChannel',
+            element: (
+              <Suspense fallback={<LoadingSpinner />}>
+                <CreateChannel />
+              </Suspense>
+            )
           },
           {
-            path:"createVideo",
-            element:<CreateVideo/>
+            path: 'createVideo',
+            element: (
+              <Suspense fallback={<LoadingSpinner />}>
+                <CreateVideo />
+              </Suspense>
+            )
           }
         ]
       },
       {
-        path:"/loading",
-        element: <LoadingSpinner/>
+        path: '/loading',
+        element: <LoadingSpinner />
       }
     ],
-    errorElement:<ErrorElement/>
+    errorElement: (
+      <Suspense fallback={<LoadingSpinner />}>
+        <ErrorElement />
+      </Suspense>
+    )
   }
-])
+]);
 
 createRoot(document.getElementById('root')).render(
-    <RouterProvider router={appRouter} />
-)
+  <RouterProvider router={appRouter} />
+);
