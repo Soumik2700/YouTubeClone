@@ -10,6 +10,7 @@ function Comment({ comment, videoId, setHasSaved,hasDelete ,setHasDelete }) {
     const channelId = user?.[3]?.[0];
     const [text, setText] = useState(comment.text);
     const authToken = localStorage.getItem("authToken");
+    console.log("comment", comment);
 
     async function handelEdit() {
         if (text === comment.text) {
@@ -66,7 +67,7 @@ function Comment({ comment, videoId, setHasSaved,hasDelete ,setHasDelete }) {
             <div className="flex gap-1">
                 {channelBanner && <img className="bg-gray-900 w-7 h-7 rounded-[50%]" src={channelBanner} alt="" />}
                 <div className="text-[10px] font-bold">
-                    <h1>User</h1>
+                    <h1>{comment?.channelId?.channelName}</h1>
                     <h1 className="text-[7px]">{timeStamp}</h1>
                 </div>
             </div>

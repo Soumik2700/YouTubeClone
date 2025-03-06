@@ -5,11 +5,13 @@ import { MdOutlineDelete } from "react-icons/md";
 import "./ChannelVideo.css"
 import axios from "axios";
 
-function ChannelVideo({ video, channelName, setHasDeleted, channelId}) {
+function ChannelVideo({ video, channelName, setHasDeleted}) {
     const authToken = localStorage.getItem("authToken");
     const user = JSON.parse(localStorage.getItem("user"));
+    const channelId = video?.uploader;
     const myChannelId = user?.[3]?.[0];
     console.log("channel video", video);
+    console.log("channelId ", channelId, " mychannelid ", myChannelId);
 
     async function handelDelete(){
         try{
@@ -19,7 +21,7 @@ function ChannelVideo({ video, channelName, setHasDeleted, channelId}) {
                 }
             });
 
-            console.log("delete response", response);
+            // console.log("delete response", response);
             if (response.data.message !== "Video deleted sucessfully"){
                 return alert(response.data.message);
             }else{

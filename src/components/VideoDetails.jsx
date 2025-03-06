@@ -223,15 +223,17 @@ function VideoDetails() {
                 <h1 className="text-2xl font-bold mt-4">{video.title}</h1>
 
                 <div className="flex flex-col md:flex-row justify-between mt-4">
-                    <Link to={`/viewChannel/${othersChannelId}`} className="flex items-center gap-4 justify-between">
-                        <div className="flex gap-2">
-                            <img className="bg-gray-900 w-8 h-8 md:w-10 md:h-10 rounded-[50%]" src={video.uploader?.channelBanner} alt="" />
-                            <div className="">
-                                <p className="font-bold text-[12px] md:text-[15px]">{video.uploader?.channelName}</p>
-                                <p className="text-[10px] opacity-50">{video.uploader?.subscriber?.length} subscribers</p>
+                    <div className="flex items-center gap-4 justify-between">
+                        <Link to={`/viewChannel/${othersChannelId}`}>
+                            <div className="flex gap-2">
+                                <img className="bg-gray-900 w-8 h-8 md:w-10 md:h-10 rounded-[50%]" src={video.uploader?.channelBanner} alt="" />
+                                <div className="">
+                                    <p className="font-bold text-[12px] md:text-[15px]">{video.uploader?.channelName}</p>
+                                    <p className="text-[10px] opacity-50">{video.uploader?.subscriber?.length} subscribers</p>
 
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                         <button
                             className={`p-1 px-3 font-semibold rounded-2xl transition duration-200 text-sm md:text-md
                              ${isSubscribed ? "bg-gray-400 text-black cursor-not-allowed" : "bg-gray-50 hover:bg-gray-200 text-black"}`}
@@ -241,7 +243,7 @@ function VideoDetails() {
                         </button>
 
 
-                    </Link>
+                    </div>
                    <div className="flex items-center gap-3 p-2">
                        {
                         video?.uploader?._id === channelId && (
