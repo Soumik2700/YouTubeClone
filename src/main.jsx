@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { Suspense, lazy } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import App from './App.jsx';
 import Home from './components/Home.jsx';
@@ -16,7 +16,7 @@ const CreateChannel = lazy(() => import('./components/CreateChannel.jsx'));
 const CreateVideo = lazy(() => import('./components/CreateVideo.jsx'));
 const ErrorElement = lazy(() => import('./components/ErrorElement.jsx'));
 
-const appRouter = createBrowserRouter([
+const appRouter = createHashRouter([
   {
     path: '/',
     element: <App />,
