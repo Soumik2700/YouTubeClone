@@ -13,7 +13,7 @@ function ChannelVideo({ video, channelName, setHasDeleted}) {
 
     async function handelDelete(){
         try{
-            const response = await axios.delete(`http://localhost:3000/${video._id}/deleteVideo`,{
+            const response = await axios.delete(`https://youtubeclone-j6jr.onrender.com/${video._id}/deleteVideo`,{
                 headers:{
                     Authorization: `Bearer ${authToken}`
                 }

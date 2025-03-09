@@ -24,7 +24,7 @@ function Comment({ comment, videoId, setHasSaved,hasDelete ,setHasDelete }) {
         };
 
         try {
-            const response = await axios.put(`http://localhost:3000/${videoId}/updateComment`, query,{
+            const response = await axios.put(`https://youtubeclone-j6jr.onrender.com/${videoId}/updateComment`, query,{
                 headers:{
                     Authorization:`Bearer ${authToken}`
                 }
@@ -46,7 +46,7 @@ function Comment({ comment, videoId, setHasSaved,hasDelete ,setHasDelete }) {
         };
 
         try {
-            const response = await axios.put(`http://localhost:3000/deleteComment`, query, {
+            const response = await axios.put(`https://youtubeclone-j6jr.onrender.com/deleteComment`, query, {
                 headers: {
                     Authorization: `Bearer ${authToken}`, // ✅ Fix headers format
                     "Content-Type": "application/json"

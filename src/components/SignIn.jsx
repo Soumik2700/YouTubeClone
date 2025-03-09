@@ -28,7 +28,7 @@ function SignIn() {
         const userData = isSignUp ? { firstName, lastName, email, password } : { email, password };
 
         try {
-            const response = await axios.post(`http://localhost:3000/api/${isSignUp ? "signup" : "login"}`, userData);
+            const response = await axios.post(`https://youtubeclone-j6jr.onrender.com/api/${isSignUp ? "signup" : "login"}`, userData);
 
             if (response.data.message){
                 return alert(response.data.message);

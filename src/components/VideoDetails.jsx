@@ -34,7 +34,7 @@ function VideoDetails() {
     useEffect(() => {
         async function fetchVideoDetails() {
             try {
-                const response = await axios.get(`http://localhost:3000/${id}/video`);
+                const response = await axios.get(`https://youtubeclone-j6jr.onrender.com/${id}/video`);
                 setVideo(response.data);
                 setComments(response.data.comment);
             } catch (err) {
@@ -49,7 +49,7 @@ function VideoDetails() {
 
         async function fetchRemainingVideos() {
             try {
-                const response = await axios.get(`http://localhost:3000/remainingVideos`, {
+                const response = await axios.get(`https://youtubeclone-j6jr.onrender.com/remainingVideos`, {
                     params: { page, limit: 10, excludeId: id }
                 });
 
@@ -76,7 +76,7 @@ function VideoDetails() {
 
     async function postComment(){
         try{
-            const response = await axios.put(`http://localhost:3000/${id}/postComment`,{
+            const response = await axios.put(`https://youtubeclone-j6jr.onrender.com/${id}/postComment`,{
                 channelId, textarea
             },
             {
@@ -99,7 +99,7 @@ function VideoDetails() {
         async function fetchSubscriptionStatus() {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/api/channels/${video.uploader?._id}/subscriptionStatus?userId=${user?.[0]}`,
+                    `https://youtubeclone-j6jr.onrender.com/api/channels/${video.uploader?._id}/subscriptionStatus?userId=${user?.[0]}`,
                     { headers: { Authorization: `Bearer ${authToken}` } }
                 );
 
@@ -122,7 +122,7 @@ function VideoDetails() {
     async function handleSubscription() {
         try {
             const response = await axios.put(
-                `http://localhost:3000/api/channels/${video.uploader?._id}/updateSubscriber`,
+                `https://youtubeclone-j6jr.onrender.com/api/channels/${video.uploader?._id}/updateSubscriber`,
                 { userId: user?.[0] },
                 { headers: { Authorization: `Bearer ${authToken}` } }
             );
@@ -146,7 +146,7 @@ function VideoDetails() {
     async function handleLikeDislike(action) {
         try {
             const response = await axios.put(
-                `http://localhost:3000/api/videos/${id}/likeDislike`,
+                `https://youtubeclone-j6jr.onrender.com/api/videos/${id}/likeDislike`,
                 { userId: user?.[0], action },
                 { headers: { Authorization: `Bearer ${authToken}` } }
             );
@@ -186,7 +186,7 @@ function VideoDetails() {
             const updatedData = { ...editData, channelId };
 
             const response = await axios.put(
-                `http://localhost:3000/api/videos/${id}/edit`,
+                `https://youtubeclone-j6jr.onrender.com/api/videos/${id}/edit`,
                 updatedData,
                 { headers: { Authorization: `Bearer ${authToken}` } }
             );

@@ -21,7 +21,7 @@ function ChannelDetails() {
     useEffect(() => {
         const fetchChannel = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/${channelId}/getChannel`);
+                const response = await axios.get(`https://youtubeclone-j6jr.onrender.com/${channelId}/getChannel`);
 
                 const { channelBanner, channelName, description, subscriber } = response.data;
                 setChannelBanner(channelBanner);
@@ -34,7 +34,7 @@ function ChannelDetails() {
                 const isUserSubscribed = subscriber.some(sub => sub === userObjectId);
                 setIsSubscribed(isUserSubscribed);
 
-                const videoRes = await axios.get(`http://localhost:3000/${channelId}/getChannelVideos`);
+                const videoRes = await axios.get(`https://youtubeclone-j6jr.onrender.com/${channelId}/getChannelVideos`);
                 setChannelVideos(videoRes.data);
 
             } catch (err) {
@@ -52,7 +52,7 @@ function ChannelDetails() {
     async function handleSubscription() {
         try {
             const response = await axios.put(
-                `http://localhost:3000/api/channels/${channelId}/updateSubscriber`,
+                `https://youtubeclone-j6jr.onrender.com/api/channels/${channelId}/updateSubscriber`,
                 { userId: user?.[0] },
                 { headers: { Authorization: `Bearer ${authToken}` } }
             );

@@ -18,7 +18,7 @@ function ProtectedRoutes() {
             }
 
             try {
-                const response = await axios.get("http://localhost:3000/user/verify", {
+                const response = await axios.get("https://youtubeclone-j6jr.onrender.com/user/verify", {
                     headers: {
                         Authorization: `Bearer ${authToken}`,
                     },

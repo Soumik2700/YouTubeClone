@@ -44,7 +44,7 @@ function CreateChannel() {
         };
 
         try {
-            const response = await axios.post("http://localhost:3000/user/createchannel", channel);
+            const response = await axios.post("https://youtubeclone-j6jr.onrender.com/user/createchannel", channel);
 
             if (response.data.message !== "Channel created sucessfully!") {
                 return alert(response.data.message);

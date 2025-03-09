@@ -17,7 +17,7 @@ function Home() {
     async function fetchVideos(reset = false) {
         setIsLoading(true);
         try {
-            const response = await axios.get("http://localhost:3000/videos", {
+            const response = await axios.get("https://youtubeclone-j6jr.onrender.com/videos", {
                 params: { search: searchQuery, category: selectedCategory, page, limit: 12 }
             });
 

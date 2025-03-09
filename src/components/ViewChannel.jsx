@@ -24,7 +24,7 @@ function ViewChannel() {
     useEffect(() => {
         const fetchChannel = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/${channelId}/getChannel`);
+                const response = await axios.get(`https://youtubeclone-j6jr.onrender.com/${channelId}/getChannel`);
 
                 const { channelBanner, channelName, description, subscriber } = response.data;
                 setChannelBanner(channelBanner);
@@ -35,7 +35,7 @@ function ViewChannel() {
                 // Check if the logged-in user is subscribed
                 setIsSubscribed(subscriber.includes(userId));
 
-                const videoRes = await axios.get(`http://localhost:3000/${channelId}/getChannelVideos`);
+                const videoRes = await axios.get(`https://youtubeclone-j6jr.onrender.com/${channelId}/getChannelVideos`);
                 setChannelVideos(videoRes.data);
             } catch (err) {
                 console.error(err.message);
@@ -48,7 +48,7 @@ function ViewChannel() {
     async function handleSubscription() {
         try {
             const response = await axios.put(
-                `http://localhost:3000/api/channels/${channelId}/updateSubscriber`,
+                `https://youtubeclone-j6jr.onrender.com/api/channels/${channelId}/updateSubscriber`,
                 { userId },
                 { headers: { Authorization: `Bearer ${authToken}` } }
             );
@@ -109,23 +109,23 @@ function ViewChannel() {
                 </span>
             </section>
 
-           {
-            channelId === myChannelId && (
+            {
+                channelId === myChannelId && (
                     <Link className="createVideoButton w-[30%] hidden md:flex items-center cursor-pointer" to={`/${name}/createVideo`}>
                         <span>Create +</span>
                     </Link>
-            )
-           }
+                )
+            }
 
             {/* Channel Videos */}
             <section className="channelVideos">
                 {channelVideos.length > 0 ? (
-                    channelVideos.map(video => <ChannelVideo key={video.videoId} 
-                        video={video} 
-                        channelName={channelName} 
+                    channelVideos.map(video => <ChannelVideo key={video.videoId}
+                        video={video}
+                        channelName={channelName}
                         channelId={channelId}
                         setHasDeleted={setHasDeleted}
-                     />)
+                    />)
                 ) : (
                     <p className="text-gray-500 text-center mt-5">No videos uploaded yet.</p>
                 )}

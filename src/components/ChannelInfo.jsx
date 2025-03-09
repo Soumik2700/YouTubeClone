@@ -31,7 +31,7 @@ function ChannelInfo() {
         }
         try {
             const response = await axios.put(
-                `http://localhost:3000/${channelId}/updateProfilePicture`,
+                `https://youtubeclone-j6jr.onrender.com/${channelId}/updateProfilePicture`,
                 { channelBanner },
                 { headers: { Authorization: `Bearer ${authToken}` } }
             );
@@ -56,7 +56,7 @@ function ChannelInfo() {
         async function getChannelBanner() {
             if (!channelId) return;
             try {
-                const response = await axios.get(`http://localhost:3000/${channelId}/getChannelBanner`, {
+                const response = await axios.get(`https://youtubeclone-j6jr.onrender.com/${channelId}/getChannelBanner`, {
                     headers: { Authorization: `Bearer ${authToken}` }
                 });
 

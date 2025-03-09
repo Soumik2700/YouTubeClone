@@ -25,7 +25,7 @@ function CreateVideo() {
         }
 
         try {
-            const response = await axios.post(`http://localhost:3000/${channelId}/createVideo`, {   // ✅ Correct way to pass request body
+            const response = await axios.post(`https://youtubeclone-j6jr.onrender.com/${channelId}/createVideo`, {   // ✅ Correct way to pass request body
                     title,
                     thumbnailUrl,
                     videoUrl,
