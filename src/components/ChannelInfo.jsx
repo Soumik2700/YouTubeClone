@@ -3,7 +3,7 @@ import "./ChannelInfo.css";
 import { Link } from "react-router-dom";
 import { MdPhotoCamera } from "react-icons/md";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 function ChannelInfo() {
     const user = JSON.parse(localStorage.getItem("user")) || [];
@@ -13,7 +13,7 @@ function ChannelInfo() {
     const [isClicked, setIsClicked] = useState(false);
     const authToken = localStorage.getItem("authToken");
     const imgUrl = localStorage.getItem("channelBanner");
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const channelId = Array.isArray(user[3]) ? user[3][0] : null;
 
@@ -21,7 +21,8 @@ function ChannelInfo() {
         localStorage.removeItem("user");
         localStorage.removeItem("authToken");
         localStorage.removeItem("channelBanner");
-        navigate("/signIn");
+        // navigate("/signIn");
+        window.location.reload();
     }
 
     async function handleUpdatePhoto() {
