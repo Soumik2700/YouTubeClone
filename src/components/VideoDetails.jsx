@@ -1,4 +1,4 @@
-import { useOutletContext, useParams } from "react-router-dom";
+import { useOutletContext, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import RemainingVideoPlayer from "./RemainingVideoPlayer";
 import Comment from "./Comment";
@@ -24,6 +24,7 @@ function VideoDetails() {
     const [hasDelete, setHasDelete] = useState(false);
     const [isSubscribed, setIsSubscribed] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
+    const navigate = useNavigate();
     const [editData, setEditData] = useState({
         title: "",
         thumbnailUrl: "",
@@ -75,6 +76,17 @@ function VideoDetails() {
     }, [page]); // ✅ Add `page` as dependency
 
     async function postComment(){
+        if(!textarea){
+            alert("No text found!")
+            return;
+        }
+
+        if (!authToken) {
+            alert("You need to login first!");
+            navigate("/singUp");
+            return;
+        }
+
         try{
             const response = await axios.put(`https://youtubeclone-j6jr.onrender.com/${id}/postComment`,{
                 channelId, textarea
@@ -120,6 +132,12 @@ function VideoDetails() {
 
 
     async function handleSubscription() {
+        if(!authToken){
+            alert("You need to login first!");
+            navigate("/singUp");
+            return;
+        }
+
         try {
             const response = await axios.put(
                 `https://youtubeclone-j6jr.onrender.com/api/channels/${video.uploader?._id}/updateSubscriber`,
@@ -144,6 +162,13 @@ function VideoDetails() {
     }
 
     async function handleLikeDislike(action) {
+        if (!authToken) {
+            alert("You need to login first!");
+            navigate("/singUp");
+            return;
+        }
+
+
         try {
             const response = await axios.put(
                 `https://youtubeclone-j6jr.onrender.com/api/videos/${id}/likeDislike`,

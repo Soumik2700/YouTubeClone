@@ -1,26 +1,20 @@
 Video Introduction link: https://drive.google.com/file/d/1HWOwq1nAcI3WgRbu92YUL4lJUFs3zTfI/view?usp=sharing
 
+Hosted Project Link: https://friendly-dasik-a567e3.netlify.app/
+
 Instructions: 
 
-==> Make a clone of the project by "git clone https://github.com/Soumik2700/YouTubeClone.git" in your terminal
+==> After download the project extract the files open the project in vs code.
 
-==> Go inside the project by "cd YouTubeClone" then do "npm install" to install all dependencies.
+==> open the terminal and go on to that perticular folder by "cd <Folder name>" where Backend, dist, node_modules, public, src and others files are located.
 
-==> Go inside the Backend project by "cd Backend" then do "npm install" to install all dependencies.
+==> run "npm install" to install all the dependencies. This will create a node_modules on your current folder.
 
-==> Open the vs code for YouTubeClone and make a .env file inside the backend project and paste the following text below (Note: You can use your own database credentials as well):
+==> Since the backend have already hosted, you don't need to install node_modules for the Backend.
 
-JWT_SECRET=mySuperSecretKey123
-DATABASE_ID=soumiksingha8
-DATABASE_PASSWORD=Atwork2700
+==> Run the command "npm run dev" on the current path.
 
-==> Open the terminal, go inside the Backnd project by "cd Backend" and run the command "npm start", your server will start running
-
-==> Open another terminal for YouTubeClone (if your are on Backend then type "cd .."). Run the command "npm run dev"
-
-==> The project will run on "localhost:5173, localhost:5174, localhost:5175,... etc"
-
-==> Go through with the Video Introduction link once
+==> Now the project is running on port "localhost:5173, localhost:5174, localhost:5175" etc..
 
 *** Dummy users credentials for login -> 
 email - soma@gmail.com
